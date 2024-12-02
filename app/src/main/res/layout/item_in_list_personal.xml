@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:paddingBottom="20dp"
+    android:background="@drawable/border"
+    android:layout_marginBottom="20dp">
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/item_list_imageP"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:scaleType="centerCrop"
+        app:shapeAppearanceOverlay="@style/circleImageView"
+        android:layout_gravity="center"
+        android:layout_margin="10dp"/>
+
+    <TextView
+        android:id="@+id/item_list_titleP"
+        android:paddingHorizontal="20dp"
+        android:paddingVertical="10dp"
+        android:fontFamily="@font/gilroy_extrabold"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:maxLines="2"
+        android:textColor="@color/white"
+        android:ellipsize="none"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:text="TextView" />
+    <TextView
+        android:id="@+id/item_list_deskP"
+        android:paddingHorizontal="20dp"
+        android:paddingVertical="10dp"
+        android:fontFamily="@font/gilroy_light"
+        android:gravity="start"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:textColor="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TextView" />
+
+    <Button
+        android:id="@+id/item_list_buttonP"
+        android:layout_width="wrap_content"
+        android:layout_gravity="center"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/gilroy_extrabold"
+        android:textColor="@color/white"
+        android:text="View"
+        android:backgroundTint="#8E0303"/>
+
+    <Button
+        android:id="@+id/item_list_buttonDeleteP"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:backgroundTint="#8E0303"
+        android:fontFamily="@font/gilroy_extrabold"
+        android:text="Delete"
+        android:textColor="@color/white" />
+
+</LinearLayout>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:color="#DA2A2A" android:state_checked="true" /> <!-- Цвет для выбранного элемента -->
+    <item android:color="#757575" android:state_pressed="true" /> <!-- Цвет при нажатии -->
+    <item android:color="#9E9E9E" /> <!-- Цвет для остальных -->
+</selector>

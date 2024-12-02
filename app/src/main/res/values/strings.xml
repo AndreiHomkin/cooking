@@ -1,0 +1,38 @@
+<resources>
+    <string name="app_name" translatable="false">Cook</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
+    <string name="login_to_add_receipts">Login to add receipts</string>
+    <string name="your_receipts">Your receipts</string>
+    <string name="name">Name</string>
+    <string name="add_receipt">Add receipt</string>
+    <string name="receipt_name">Receipt name</string>
+    <string name="category">Category</string>
+    <string name="ingredients">Ingredients</string>
+    <string name="steps_to_cook">Steps to cook</string>
+    <string name="description">Description</string>
+    <string name="image">Image</string>
+    <string name="create_receipt">Create receipt</string>
+    <string name="subcategory">Subcategory</string>
+    <string name="login_to_your_account">Login to your account</string>
+    <string name="enter_login">Enter login</string>
+    <string name="enter_password">Enter password</string>
+    <string name="login">Login</string>
+    <string name="register">Register</string>
+    <string name="create_an_account">Create an account</string>
+    <string name="enter_email">Enter email</string>
+    <string name="create">Create</string>
+    <string name="ingredientsWithDblpoint">Ingredients:</string>
+    <string name="descriptionWithDblpoint">Description:</string>
+    <string name="when_to_eat">When to eat:</string>
+    <string name="categoryWithDblpoint">Category:</string>
+    <string name="you_don_t_have_here_anything_yet">You don\'t have anything here yet</string>
+    <string name="login_to_add_favourites">Login to add favourites</string>
+    <string name="favourites">Favourites</string>
+    <string name="menu">Menu</string>
+    <string name="new_for_you">New for you</string>
+    <string name="what_s_on_menu_today">What\'s on menu today</string>
+    <string name="categories">Categories</string>
+    <string name="logout_from_account">Logout from account</string>
+    <string name="profile">Profile</string>
+</resources>

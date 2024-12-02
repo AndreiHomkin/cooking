@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#C54D4D"
+    tools:context=".AuthActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#fdfdfd"
+        android:fontFamily="@font/gilroy_extrabold"
+        android:layout_gravity="center"
+        android:layout_marginTop="170dp"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:text="@string/login_to_your_account" />
+
+    <EditText
+        android:id="@+id/user_login_auth"
+        android:layout_width="220dp"
+        android:layout_height="50dp"
+        android:ems="10"
+        android:digits="abcdefghijklmnopqrstuvwxyz0123456789_ABCDEFGHIJKLMNOPQRTSUVWXYZ"
+        android:inputType="textEmailAddress"
+        android:textColorHint="#ACA5A5"
+        android:fontFamily="@font/gilroy_light"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center"
+        android:textColor="#fdfdfd"
+        android:hint="@string/enter_login" />
+
+    <EditText
+        android:id="@+id/user_pass_auth"
+        android:layout_width="220dp"
+        android:layout_height="50dp"
+        android:ems="10"
+        android:digits="abcdefghijklmnopqrstuvwxyz0123456789_ABCDEFGHIJKLMNOPQRTSUVWXYZ"
+        android:fontFamily="@font/gilroy_light"
+        android:inputType="textPassword"
+        android:textColorHint="#ACA5A5"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center"
+        android:textColor="#fdfdfd"
+        android:hint="@string/enter_password" />
+
+    <Button
+        android:id="@+id/button_auth"
+        android:layout_width="220dp"
+        android:layout_height="wrap_content"
+        android:text="@string/login"
+        android:textStyle="bold"
+        android:textSize="16sp"
+        android:textColor="#fff"
+        android:layout_gravity="center"
+        android:backgroundTint="#201e28"
+        android:layout_marginTop="30dp"/>
+
+    <TextView
+        android:id="@+id/link_to_reg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="120dp"
+        android:text="@string/register"
+        android:textColor="#fdfdfd"
+        android:fontFamily="@font/gilroy_extrabold"
+        android:textSize="17sp" />
+
+</LinearLayout>
