@@ -10,7 +10,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -49,7 +51,43 @@ class HomeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_home, container, false)
+        val view = inflater.inflate(R.layout.fragment_home, container, false)
+
+        val textMenu = view.findViewById<TextView>(R.id.textView)
+        val textForYou = view.findViewById<TextView>(R.id.textView2)
+        val textToday = view.findViewById<TextView>(R.id.todayMenuTxt)
+        val textCategory = view.findViewById<TextView>(R.id.categoryTxt)
+
+        val settingsPreferences = requireContext().getSharedPreferences("Settings", Context.MODE_PRIVATE)
+        val isDarkMode = settingsPreferences.getBoolean("isDarkMode", false)
+
+        textMenu.setTextColor(
+            ContextCompat.getColor(
+                requireContext(),
+                if (isDarkMode) R.color.white else R.color.black
+            )
+        )
+        textForYou.setTextColor(
+            ContextCompat.getColor(
+                requireContext(),
+                if (isDarkMode) R.color.white else R.color.black
+            )
+        )
+        textToday.setTextColor(
+            ContextCompat.getColor(
+                requireContext(),
+                if (isDarkMode) R.color.white else R.color.black
+            )
+        )
+        textCategory.setTextColor(
+            ContextCompat.getColor(
+                requireContext(),
+                if (isDarkMode) R.color.white else R.color.black
+            )
+        )
+
+
+        return view
     }
 
     companion object {

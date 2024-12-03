@@ -4,10 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/profileBack"
     android:background="@drawable/pattern_design"
     tools:context=".ProfileFragment">
-
-    <!-- TODO: Update blank fragment layout -->
 
     <TextView
         android:id="@+id/account_name"
@@ -29,6 +28,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="536dp"
         android:backgroundTint="#8E0303"
+        android:textColor="@color/white"
         android:text="@string/login_to_your_account"
         android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -44,6 +44,7 @@
         android:text="@string/create_an_account"
         android:textSize="20dp"
         android:backgroundTint="#8E0303"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
@@ -57,6 +58,7 @@
         android:backgroundTint="#8E0303"
         android:text="@string/logout_from_account"
         android:textSize="20dp"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.537"
@@ -76,5 +78,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/changeTheme"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:src="@drawable/baseline_sunny_24"
+        app:layout_constraintVertical_bias="0.974" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -13,8 +13,10 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Spinner
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
@@ -34,6 +36,64 @@ class AddActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add)
+
+        val settingsPreferences = getSharedPreferences("Settings", Context.MODE_PRIVATE)
+        val isDarkMode = settingsPreferences.getBoolean("isDarkMode", false)
+
+        val textAddReceipt = findViewById<TextView>(R.id.catNameActivity)
+        val bgAddActivity = findViewById<ConstraintLayout>(R.id.addActivity)
+        val receiptNameText = findViewById<TextView>(R.id.receiptNameText)
+        val receiptCatText = findViewById<TextView>(R.id.receiptCatText)
+        val receiptSubcatText = findViewById<TextView>(R.id.subCat)
+        val receiptIngrText = findViewById<TextView>(R.id.receiptIngrText)
+        val receiptStepsText = findViewById<TextView>(R.id.textView6)
+        val receiptImageText = findViewById<TextView>(R.id.textView5)
+
+        bgAddActivity.setBackgroundResource(
+            if (isDarkMode) R.drawable.dark_pattern_design else R.drawable.pattern_design
+        )
+        textAddReceipt.setTextColor(
+            ContextCompat.getColor(
+                this,
+                if (isDarkMode) R.color.white else R.color.black
+            )
+        )
+        receiptNameText.setTextColor(
+            ContextCompat.getColor(
+                this,
+                if (isDarkMode) R.color.white else R.color.black
+            )
+        )
+        receiptCatText.setTextColor(
+            ContextCompat.getColor(
+                this,
+                if (isDarkMode) R.color.white else R.color.black
+            )
+        )
+        receiptSubcatText.setTextColor(
+            ContextCompat.getColor(
+                this,
+                if (isDarkMode) R.color.white else R.color.black
+            )
+        )
+        receiptIngrText.setTextColor(
+            ContextCompat.getColor(
+                this,
+                if (isDarkMode) R.color.white else R.color.black
+            )
+        )
+        receiptStepsText.setTextColor(
+            ContextCompat.getColor(
+                this,
+                if (isDarkMode) R.color.white else R.color.black
+            )
+        )
+        receiptImageText.setTextColor(
+            ContextCompat.getColor(
+                this,
+                if (isDarkMode) R.color.white else R.color.black
+            )
+        )
 
         val btnExit = findViewById<ImageView>(R.id.backBtn)
         btnExit.setOnClickListener {

@@ -17,7 +17,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var bottom_navigation: BottomNavigationView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         setContentView(R.layout.activity_main)
         if (!isNetworkAvailable()) {
             AlertDialog.Builder(this).apply {
@@ -42,7 +41,12 @@ class MainActivity : AppCompatActivity() {
             val searchFragment = SearchFragment()
             val addFragment = AddFragment()
 
-            makeCurrentFragment(homeFragment)
+            if (savedInstanceState == null) {
+                makeCurrentFragment(homeFragment)
+            } else {
+                val currentFragment = supportFragmentManager.findFragmentByTag("CURRENT_FRAGMENT")
+                currentFragment?.let { makeCurrentFragment(it as Fragment) }
+            }
 
             bottom_navigation.setOnItemSelectedListener{
                 when(it.itemId){
@@ -67,6 +71,15 @@ class MainActivity : AppCompatActivity() {
                 sharedPreferences123.edit().clear().apply()
             }
             sharedPreferences123.edit().putBoolean("isAppOpen", true).apply()
+
+            val sharedPreferencesSettings = getSharedPreferences("Settings", Context.MODE_PRIVATE)
+            val isDarkMode = sharedPreferencesSettings.getBoolean("isDarkMode", false)
+            if(isDarkMode){
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            }
+            else{
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+            }
         }
     }
     @SuppressLint("MissingSuperCall")

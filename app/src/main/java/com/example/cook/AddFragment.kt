@@ -8,8 +8,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.ScrollView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
@@ -44,7 +46,30 @@ class AddFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_add, container, false)
 
+        val settingsPreferences = requireContext().getSharedPreferences("Settings", Context.MODE_PRIVATE)
+        val isDarkMode = settingsPreferences.getBoolean("isDarkMode", false)
+
         val btnAddItem = view.findViewById<ImageView>(R.id.addReceipt)
+        val bgAdd = view.findViewById<ScrollView>(R.id.addBack)
+        val textAdd = view.findViewById<TextView>(R.id.catNameActivity)
+        val textWarning = view.findViewById<TextView>(R.id.warning)
+
+        bgAdd.setBackgroundResource(
+            if (isDarkMode) R.drawable.dark_pattern_design else R.drawable.pattern_design
+        )
+        textAdd.setTextColor(
+            ContextCompat.getColor(
+                requireContext(),
+                if (isDarkMode) R.color.white else R.color.black
+            )
+        )
+        textWarning.setTextColor(
+            ContextCompat.getColor(
+                requireContext(),
+                if (isDarkMode) R.color.white else R.color.black
+            )
+        )
+
         btnAddItem.setOnClickListener {
             val intent = Intent(requireContext(), AddActivity::class.java)
             startActivityForResult(intent, REQUEST_CODE_ADD)

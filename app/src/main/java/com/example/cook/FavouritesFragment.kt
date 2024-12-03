@@ -7,8 +7,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ScrollView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
@@ -73,7 +75,39 @@ class FavouritesFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_favourites, container, false)
+        val view = inflater.inflate(R.layout.fragment_favourites, container, false)
+
+        val settingsPreferences = requireContext().getSharedPreferences("Settings", Context.MODE_PRIVATE)
+        val isDarkMode = settingsPreferences.getBoolean("isDarkMode", false)
+
+        val bgFavourites = view.findViewById<ScrollView>(R.id.fragment_container)
+        val textFavourites = view.findViewById<TextView>(R.id.textView)
+        val textWarningFav = view.findViewById<TextView>(R.id.warningFav)
+        val textWarningNo = view.findViewById<TextView>(R.id.warningNo)
+
+        bgFavourites.setBackgroundResource(
+            if (isDarkMode) R.drawable.dark_pattern_design else R.drawable.pattern_design
+        )
+        textFavourites.setTextColor(
+            ContextCompat.getColor(
+                requireContext(),
+                if (isDarkMode) R.color.white else R.color.black
+            )
+        )
+        textWarningFav.setTextColor(
+            ContextCompat.getColor(
+                requireContext(),
+                if (isDarkMode) R.color.white else R.color.black
+            )
+        )
+        textWarningNo.setTextColor(
+            ContextCompat.getColor(
+                requireContext(),
+                if (isDarkMode) R.color.white else R.color.black
+            )
+        )
+
+        return view
     }
 
     companion object {

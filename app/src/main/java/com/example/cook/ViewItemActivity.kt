@@ -2,19 +2,16 @@ package com.example.cook
 
 import android.content.Context
 import android.content.Intent
-import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import com.bumptech.glide.request.target.Target
-import java.io.File
 
 
 class ViewItemActivity : AppCompatActivity() {
@@ -25,6 +22,10 @@ class ViewItemActivity : AppCompatActivity() {
         val itemName = intent.getStringExtra("itemTitle")
         val wasCreatedByYou = intent.getBooleanExtra("createdByYou", false)
         val btnAddFavourite = findViewById<ImageView>(R.id.addFavourite)
+
+        val settingsPreferences = getSharedPreferences("Settings", Context.MODE_PRIVATE)
+        val isDarkMode = settingsPreferences.getBoolean("isDarkMode", false)
+
 
         if (itemName != null) {
             dbHelper = DbHelper(this, null)
@@ -52,6 +53,67 @@ class ViewItemActivity : AppCompatActivity() {
                 val itemSubCategory = findViewById<TextView>(R.id.item_show_subcat)
                 val itemDescr = findViewById<TextView>(R.id.item_show_desc)
                 val itemIngr = findViewById<TextView>(R.id.item_show_ingredients)
+
+                val whenToEat = findViewById<TextView>(R.id.textView3)
+                val categoryText = findViewById<TextView>(R.id.textView4)
+                val ingrText = findViewById<TextView>(R.id.textView5)
+                val descrText = findViewById<TextView>(R.id.textView6)
+
+                itemNameText.setTextColor(
+                    ContextCompat.getColor(
+                        this,
+                        if (isDarkMode) R.color.white else R.color.black
+                    )
+                )
+                itemCategory.setTextColor(
+                    ContextCompat.getColor(
+                        this,
+                        if (isDarkMode) R.color.white else R.color.black
+                    )
+                )
+                itemSubCategory.setTextColor(
+                    ContextCompat.getColor(
+                        this,
+                        if (isDarkMode) R.color.white else R.color.black
+                    )
+                )
+                itemDescr.setTextColor(
+                    ContextCompat.getColor(
+                        this,
+                        if (isDarkMode) R.color.white else R.color.black
+                    )
+                )
+                itemIngr.setTextColor(
+                    ContextCompat.getColor(
+                        this,
+                        if (isDarkMode) R.color.white else R.color.black
+                    )
+                )
+                whenToEat.setTextColor(
+                    ContextCompat.getColor(
+                        this,
+                        if (isDarkMode) R.color.white else R.color.black
+                    )
+                )
+                categoryText.setTextColor(
+                    ContextCompat.getColor(
+                        this,
+                        if (isDarkMode) R.color.white else R.color.black
+                    )
+                )
+                ingrText.setTextColor(
+                    ContextCompat.getColor(
+                        this,
+                        if (isDarkMode) R.color.white else R.color.black
+                    )
+                )
+                descrText.setTextColor(
+                    ContextCompat.getColor(
+                        this,
+                        if (isDarkMode) R.color.white else R.color.black
+                    )
+                )
+
 
                 itemNameText.text = item.name
                 itemCategory.text = item.category
