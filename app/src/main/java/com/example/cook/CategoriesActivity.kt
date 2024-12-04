@@ -1,10 +1,13 @@
 package com.example.cook
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.widget.ImageView
+import android.widget.ScrollView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
@@ -16,10 +19,32 @@ class CategoriesActivity: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_categories)
+
+        val settingsPreferences = getSharedPreferences("Settings", Context.MODE_PRIVATE)
+        val isDarkMode = settingsPreferences.getBoolean("isDarkMode", false)
+
         val categoryName = intent.getStringExtra("catName")
         val subCategoryName = intent.getStringExtra("subcatName")
         val catNameTextView = findViewById<TextView>(R.id.catNameActivity)
         val buttonExit = findViewById<ImageView>(R.id.backBtn)
+
+        val bgCategory = findViewById<ScrollView>(R.id.bgCategory)
+
+        catNameTextView.setTextColor(
+            ContextCompat.getColor(
+                this,
+                if (isDarkMode) R.color.white else R.color.black
+            )
+        )
+
+        bgCategory.setBackgroundResource(
+            if (isDarkMode) R.drawable.dark_pattern_design else R.drawable.pattern_design
+        )
+
+        buttonExit.setBackgroundResource(
+            if (isDarkMode) R.drawable.baseline_arrow_back_24 else R.drawable.baseline_arrow_back_24_white
+        )
+
         if(categoryName.isNullOrEmpty()){
             catNameTextView.text = subCategoryName
         }
