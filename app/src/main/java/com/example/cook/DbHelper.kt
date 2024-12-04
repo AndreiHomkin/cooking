@@ -125,6 +125,15 @@ class DbHelper(val context: Context, val factory: SQLiteDatabase.CursorFactory?)
         cursor.close()
         return foodList
     }
+    fun isEmailExist(email: String): Boolean {
+        val db = this.readableDatabase
+        val query = "SELECT * FROM users WHERE email = ?"
+        val cursor = db.rawQuery(query, arrayOf(email))
+        val exists = cursor.count > 0
+        cursor.close()
+        db.close()
+        return exists
+    }
     fun deleteFood(item: Item) {
         val db = this.writableDatabase
         db.delete("food", "name = ?", arrayOf(item.name)) // Delete food by id

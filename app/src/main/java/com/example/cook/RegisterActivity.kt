@@ -35,6 +35,9 @@ class RegisterActivity : AppCompatActivity() {
                 if(db.isUserExist(login)){
                     Toast.makeText(this, "User $login already exist", Toast.LENGTH_LONG).show()
                 }
+                else if(db.isEmailExist(email)){
+                    Toast.makeText(this, "Email $email is already used", Toast.LENGTH_LONG).show()
+                }
                 else if(!isContains){
                     Toast.makeText(this, "Email is incorrect", Toast.LENGTH_LONG).show()
                 }
