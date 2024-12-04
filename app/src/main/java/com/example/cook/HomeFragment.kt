@@ -1,17 +1,12 @@
 package com.example.cook
 
 import android.content.Context
-import android.content.DialogInterface
-import android.net.ConnectivityManager
-import android.net.NetworkCapabilities
-import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -34,8 +29,8 @@ class HomeFragment : Fragment() {
     private lateinit var categoriesArrayList: ArrayList<Category>
     private lateinit var categoriesArrayList1: ArrayList<Category>
 
-    lateinit var imageCat: Array<Int>
-    lateinit var nameCat: Array<String>
+    private lateinit var imageCat: Array<Int>
+    private lateinit var nameCat: Array<String>
 
     private lateinit var dbHelper: DbHelper
 
@@ -90,16 +85,7 @@ class HomeFragment : Fragment() {
         return view
     }
 
-    companion object {
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            HomeFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
-    }
+    companion object;
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -143,7 +129,7 @@ class HomeFragment : Fragment() {
 
 
     private fun dataInitialiseCategory(){
-        categoriesArrayList = arrayListOf<Category>()
+        categoriesArrayList = arrayListOf()
         imageCat = arrayOf(
             R.drawable.breakfast,
             R.drawable.lunch,
@@ -163,7 +149,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun dataInitialiseCategory1(){
-        categoriesArrayList1 = arrayListOf<Category>()
+        categoriesArrayList1 = arrayListOf()
         imageCat = arrayOf(
             R.drawable.appetizers,
             R.drawable.salads,

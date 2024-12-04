@@ -45,7 +45,7 @@ class MainActivity : AppCompatActivity() {
                 makeCurrentFragment(homeFragment)
             } else {
                 val currentFragment = supportFragmentManager.findFragmentByTag("CURRENT_FRAGMENT")
-                currentFragment?.let { makeCurrentFragment(it as Fragment) }
+                currentFragment?.let { makeCurrentFragment(it) }
             }
 
             bottom_navigation.setOnItemSelectedListener{
@@ -82,6 +82,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+    @Deprecated("Deprecated in Java")
     @SuppressLint("MissingSuperCall")
     override fun onBackPressed() {
         AlertDialog.Builder(this).apply {

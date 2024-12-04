@@ -11,14 +11,14 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 
-class ItemsAdapterPersonal(var items: List<Item>): RecyclerView.Adapter<ItemsAdapterPersonal.MyViewHolder>() {
+class ItemsAdapterPersonal(private var items: List<Item>): RecyclerView.Adapter<ItemsAdapterPersonal.MyViewHolder>() {
     class MyViewHolder(view: View): RecyclerView.ViewHolder(view){
         val image: ImageView = view.findViewById(R.id.item_list_imageP)
         val title: TextView = view.findViewById(R.id.item_list_titleP)
         val desc: TextView = view.findViewById(R.id.item_list_deskP)
         val button: Button = view.findViewById(R.id.item_list_buttonP)
         val buttonDelete: Button = view.findViewById(R.id.item_list_buttonDeleteP)
-        val context = view.context
+        val context = view.context!!
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {

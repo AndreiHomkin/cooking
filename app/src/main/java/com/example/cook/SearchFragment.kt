@@ -1,5 +1,6 @@
 package com.example.cook
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -57,6 +58,7 @@ class SearchFragment : Fragment() {
             }
         })
     }
+    @SuppressLint("NotifyDataSetChanged")
     private fun filterList(query: String?) {
         val searchQuery = query?.lowercase() ?: ""
         filteredList.clear()
@@ -80,14 +82,5 @@ class SearchFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_search, container, false)
     }
 
-    companion object {
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            SearchFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
-    }
+    companion object
 }

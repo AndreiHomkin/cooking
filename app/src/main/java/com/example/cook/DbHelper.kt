@@ -5,11 +5,8 @@ import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
-import java.io.ByteArrayOutputStream
 
-class DbHelper(val context: Context, val factory: SQLiteDatabase.CursorFactory?):
+class DbHelper(val context: Context, factory: SQLiteDatabase.CursorFactory?):
     SQLiteOpenHelper(context, "app", factory, 10) {
     override fun onCreate(db: SQLiteDatabase?) {
         val query = "CREATE TABLE users (" +
@@ -34,14 +31,14 @@ class DbHelper(val context: Context, val factory: SQLiteDatabase.CursorFactory?)
                 "FOREIGN KEY (user_id) REFERENCES users(id), " +
                 "FOREIGN KEY (food_id) REFERENCES food(id))"
         db!!.execSQL(query)
-        db!!.execSQL(queryFood)
-        db!!.execSQL(queryFavourites)
+        db.execSQL(queryFood)
+        db.execSQL(queryFavourites)
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, p1: Int, p2: Int) {
         db!!.execSQL("DROP TABLE IF EXISTS users")
-        db!!.execSQL("DROP TABLE IF EXISTS food")
-        db!!.execSQL("DROP TABLE IF EXISTS favorites")
+        db.execSQL("DROP TABLE IF EXISTS food")
+        db.execSQL("DROP TABLE IF EXISTS favorites")
         onCreate(db)
     }
 
@@ -106,7 +103,6 @@ class DbHelper(val context: Context, val factory: SQLiteDatabase.CursorFactory?)
 
         if (cursor.moveToFirst()) {
             do {
-                val id = cursor.getInt(cursor.getColumnIndexOrThrow("id"))
                 val name = cursor.getString(cursor.getColumnIndexOrThrow("name"))
                 val category = cursor.getString(cursor.getColumnIndexOrThrow("category"))
                 val subcategory = cursor.getString(cursor.getColumnIndexOrThrow("subcategory"))
@@ -114,8 +110,6 @@ class DbHelper(val context: Context, val factory: SQLiteDatabase.CursorFactory?)
                 val ingredients = cursor.getString(cursor.getColumnIndexOrThrow("ingredients"))
 
                 val image = cursor.getString(cursor.getColumnIndexOrThrow("image"))
-
-                val userId = cursor.getInt(cursor.getColumnIndexOrThrow("user_id"))
 
                 val foodItem = Item(name, category,subcategory, description, ingredients, image)
                 foodList.add(foodItem)
@@ -146,14 +140,12 @@ class DbHelper(val context: Context, val factory: SQLiteDatabase.CursorFactory?)
 
         if (cursor.moveToFirst()) {
             do {
-                val id = cursor.getInt(cursor.getColumnIndexOrThrow("id"))
                 val name = cursor.getString(cursor.getColumnIndexOrThrow("name"))
                 val category = cursor.getString(cursor.getColumnIndexOrThrow("category"))
                 val subcategory = cursor.getString(cursor.getColumnIndexOrThrow("subcategory"))
                 val description = cursor.getString(cursor.getColumnIndexOrThrow("description"))
                 val ingredients = cursor.getString(cursor.getColumnIndexOrThrow("ingredients"))
                 val image = cursor.getString(cursor.getColumnIndexOrThrow("image"))
-                val user_id = cursor.getInt(cursor.getColumnIndexOrThrow("user_id"))
 
                 val foodItem = Item(name, category,subcategory, description, ingredients, image)
                 foodList.add(foodItem)
@@ -181,13 +173,11 @@ class DbHelper(val context: Context, val factory: SQLiteDatabase.CursorFactory?)
 
         if (cursor.moveToFirst()) {
             do {
-                val id = cursor.getInt(cursor.getColumnIndexOrThrow("id"))
                 val name = cursor.getString(cursor.getColumnIndexOrThrow("name"))
                 val subcategory = cursor.getString(cursor.getColumnIndexOrThrow("subcategory"))
                 val description = cursor.getString(cursor.getColumnIndexOrThrow("description"))
                 val ingredients = cursor.getString(cursor.getColumnIndexOrThrow("ingredients"))
                 val image = cursor.getString(cursor.getColumnIndexOrThrow("image"))
-                val userId = cursor.getInt(cursor.getColumnIndexOrThrow("user_id"))
 
                 val foodItem = Item(name, category,subcategory, description, ingredients, image)
                 foodList.add(foodItem)
@@ -204,13 +194,11 @@ class DbHelper(val context: Context, val factory: SQLiteDatabase.CursorFactory?)
 
         if (cursor.moveToFirst()) {
             do {
-                val id = cursor.getInt(cursor.getColumnIndexOrThrow("id"))
                 val name = cursor.getString(cursor.getColumnIndexOrThrow("name"))
                 val category = cursor.getString(cursor.getColumnIndexOrThrow("category"))
                 val description = cursor.getString(cursor.getColumnIndexOrThrow("description"))
                 val ingredients = cursor.getString(cursor.getColumnIndexOrThrow("ingredients"))
                 val image = cursor.getString(cursor.getColumnIndexOrThrow("image"))
-                val userId = cursor.getInt(cursor.getColumnIndexOrThrow("user_id"))
 
                 val foodItem = Item(name, category,subcategory, description, ingredients, image)
                 foodList.add(foodItem)
@@ -227,7 +215,6 @@ class DbHelper(val context: Context, val factory: SQLiteDatabase.CursorFactory?)
         var foodItem: Item? = null
 
         if (cursor.moveToFirst()) {
-            val id = cursor.getInt(cursor.getColumnIndexOrThrow("id"))
             val category = cursor.getString(cursor.getColumnIndexOrThrow("category"))
             val subcategory = cursor.getString(cursor.getColumnIndexOrThrow("subcategory"))
             val description = cursor.getString(cursor.getColumnIndexOrThrow("description"))
@@ -268,7 +255,6 @@ class DbHelper(val context: Context, val factory: SQLiteDatabase.CursorFactory?)
 
         if (cursor.moveToFirst()) {
             do {
-                val id = cursor.getInt(cursor.getColumnIndexOrThrow("id"))
                 val name = cursor.getString(cursor.getColumnIndexOrThrow("name"))
                 val category = cursor.getString(cursor.getColumnIndexOrThrow("category"))
                 val subcategory = cursor.getString(cursor.getColumnIndexOrThrow("subcategory"))

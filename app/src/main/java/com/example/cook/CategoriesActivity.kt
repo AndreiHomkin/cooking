@@ -1,7 +1,8 @@
+@file:Suppress("DEPRECATION")
+
 package com.example.cook
 
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.widget.ImageView
 import android.widget.ScrollView

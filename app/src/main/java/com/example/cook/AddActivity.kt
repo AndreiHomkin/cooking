@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION")
+
 package com.example.cook
 
 import android.content.Context
@@ -23,9 +25,9 @@ import com.bumptech.glide.Glide
 
 
 class AddActivity : AppCompatActivity() {
-    val categories: Array<String> = arrayOf("Breakfast", "Lunch", "Dinner", "Supper")
-    val subcategories: Array<String> = arrayOf("Appetizers", "Salads", "Main Dishes", "Soups", "Desserts", "Drinks")
-    val REQUEST_CODE = 1
+    private val categories: Array<String> = arrayOf("Breakfast", "Lunch", "Dinner", "Supper")
+    private val subcategories: Array<String> = arrayOf("Appetizers", "Salads", "Main Dishes", "Soups", "Desserts", "Drinks")
+    private val REQUEST_CODE = 1
     private var item: Item? = null
     private var selectedCategory: String? = null
     private var selectedSubCategory: String? = null
@@ -192,6 +194,7 @@ class AddActivity : AppCompatActivity() {
 
 
 
+    @Deprecated("Deprecated in Java")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == REQUEST_CODE && resultCode == RESULT_OK && data != null) {
@@ -213,6 +216,7 @@ class AddActivity : AppCompatActivity() {
             }
         }
     }
+    @Deprecated("Deprecated in Java")
     override fun onBackPressed() {
         setResult(RESULT_OK)
         super.onBackPressed()

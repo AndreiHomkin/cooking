@@ -1,5 +1,8 @@
+@file:Suppress("DEPRECATION")
+
 package com.example.cook
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -64,6 +67,7 @@ class FavouritesFragment : Fragment() {
         }
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == REQUEST_CODE_ADD && resultCode == AppCompatActivity.RESULT_OK) {
@@ -111,16 +115,9 @@ class FavouritesFragment : Fragment() {
     }
 
     companion object {
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            FavouritesFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
         private const val REQUEST_CODE_ADD = 1
     }
+    @SuppressLint("NotifyDataSetChanged")
     private fun refreshItems() {
         val sharedPreferencesUser = requireContext().getSharedPreferences("UserPrefs", Context.MODE_PRIVATE)
         val userName = sharedPreferencesUser.getString("userName", "Unknown")

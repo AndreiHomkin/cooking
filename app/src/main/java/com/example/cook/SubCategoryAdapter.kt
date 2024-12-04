@@ -8,7 +8,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class SubCategoryAdapter(var subcategories: List<Category>): RecyclerView.Adapter<SubCategoryAdapter.CategoryViewHolder>() {
+class SubCategoryAdapter(private var subcategories: List<Category>): RecyclerView.Adapter<SubCategoryAdapter.CategoryViewHolder>() {
     class CategoryViewHolder(view: View): RecyclerView.ViewHolder(view){
         val image: ImageView = view.findViewById(R.id.categoryImg)
         val title: TextView = view.findViewById(R.id.categoryName)
