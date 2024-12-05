@@ -56,31 +56,10 @@ class HomeFragment : Fragment() {
         val settingsPreferences = requireContext().getSharedPreferences("Settings", Context.MODE_PRIVATE)
         val isDarkMode = settingsPreferences.getBoolean("isDarkMode", false)
 
-        textMenu.setTextColor(
-            ContextCompat.getColor(
-                requireContext(),
-                if (isDarkMode) R.color.white else R.color.black
-            )
-        )
-        textForYou.setTextColor(
-            ContextCompat.getColor(
-                requireContext(),
-                if (isDarkMode) R.color.white else R.color.black
-            )
-        )
-        textToday.setTextColor(
-            ContextCompat.getColor(
-                requireContext(),
-                if (isDarkMode) R.color.white else R.color.black
-            )
-        )
-        textCategory.setTextColor(
-            ContextCompat.getColor(
-                requireContext(),
-                if (isDarkMode) R.color.white else R.color.black
-            )
-        )
-
+        applyTextColor(requireContext(), textMenu, isDarkMode)
+        applyTextColor(requireContext(), textForYou, isDarkMode)
+        applyTextColor(requireContext(), textToday, isDarkMode)
+        applyTextColor(requireContext(), textCategory, isDarkMode)
 
         return view
     }

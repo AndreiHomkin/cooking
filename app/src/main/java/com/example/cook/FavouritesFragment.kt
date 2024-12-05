@@ -12,6 +12,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ScrollView
 import android.widget.TextView
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.GridLayoutManager
@@ -32,6 +34,7 @@ class FavouritesFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         arguments?.let {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
@@ -92,24 +95,9 @@ class FavouritesFragment : Fragment() {
         bgFavourites.setBackgroundResource(
             if (isDarkMode) R.drawable.dark_pattern_design else R.drawable.pattern_design
         )
-        textFavourites.setTextColor(
-            ContextCompat.getColor(
-                requireContext(),
-                if (isDarkMode) R.color.white else R.color.black
-            )
-        )
-        textWarningFav.setTextColor(
-            ContextCompat.getColor(
-                requireContext(),
-                if (isDarkMode) R.color.white else R.color.black
-            )
-        )
-        textWarningNo.setTextColor(
-            ContextCompat.getColor(
-                requireContext(),
-                if (isDarkMode) R.color.white else R.color.black
-            )
-        )
+        applyTextColor(requireContext(), textFavourites, isDarkMode)
+        applyTextColor(requireContext(), textWarningFav, isDarkMode)
+        applyTextColor(requireContext(), textWarningNo, isDarkMode)
 
         return view
     }
@@ -122,8 +110,22 @@ class FavouritesFragment : Fragment() {
         val sharedPreferencesUser = requireContext().getSharedPreferences("UserPrefs", Context.MODE_PRIVATE)
         val userName = sharedPreferencesUser.getString("userName", "Unknown")
         val userId = dbHelper.getUserId(userName!!)
+        val updatedFavorites = dbHelper.getFavoritesByUser(userId)
         itemsArrayList.clear()
-        itemsArrayList.addAll(dbHelper.getFoodsByUser(userId))
+        itemsArrayList.addAll(updatedFavorites)
         adapter.notifyDataSetChanged()
+        val warningNo = view?.findViewById<TextView>(R.id.warningNo)
+        if (itemsArrayList.isEmpty()) {
+            warningNo?.visibility = View.VISIBLE
+            recycler.visibility = View.GONE
+        } else {
+            warningNo?.visibility = View.GONE
+            recycler.visibility = View.VISIBLE
+        }
+    }
+
+    override fun onResume() {
+        refreshItems()
+        super.onResume()
     }
 }

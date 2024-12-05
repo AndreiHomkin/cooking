@@ -50,54 +50,29 @@ class AddActivity : AppCompatActivity() {
         val receiptIngrText = findViewById<TextView>(R.id.receiptIngrText)
         val receiptStepsText = findViewById<TextView>(R.id.textView6)
         val receiptImageText = findViewById<TextView>(R.id.textView5)
+        val receiptName = findViewById<EditText>(R.id.receiptName)
+        val receiptIngr = findViewById<EditText>(R.id.receiptIngr)
+        val receiptDecr = findViewById<EditText>(R.id.receiptDesc)
 
         bgAddActivity.setBackgroundResource(
             if (isDarkMode) R.drawable.dark_pattern_design else R.drawable.pattern_design
         )
-        textAddReceipt.setTextColor(
-            ContextCompat.getColor(
-                this,
-                if (isDarkMode) R.color.white else R.color.black
-            )
-        )
-        receiptNameText.setTextColor(
-            ContextCompat.getColor(
-                this,
-                if (isDarkMode) R.color.white else R.color.black
-            )
-        )
-        receiptCatText.setTextColor(
-            ContextCompat.getColor(
-                this,
-                if (isDarkMode) R.color.white else R.color.black
-            )
-        )
-        receiptSubcatText.setTextColor(
-            ContextCompat.getColor(
-                this,
-                if (isDarkMode) R.color.white else R.color.black
-            )
-        )
-        receiptIngrText.setTextColor(
-            ContextCompat.getColor(
-                this,
-                if (isDarkMode) R.color.white else R.color.black
-            )
-        )
-        receiptStepsText.setTextColor(
-            ContextCompat.getColor(
-                this,
-                if (isDarkMode) R.color.white else R.color.black
-            )
-        )
-        receiptImageText.setTextColor(
-            ContextCompat.getColor(
-                this,
-                if (isDarkMode) R.color.white else R.color.black
-            )
-        )
+
+        applyTextColor(this, receiptName, isDarkMode)
+        applyTextColor(this,receiptIngr, isDarkMode)
+        applyTextColor(this,receiptDecr, isDarkMode)
+        applyTextColor(this,textAddReceipt, isDarkMode)
+        applyTextColor(this,receiptNameText, isDarkMode)
+        applyTextColor(this,receiptCatText, isDarkMode)
+        applyTextColor(this,receiptSubcatText, isDarkMode)
+        applyTextColor(this,receiptIngrText, isDarkMode)
+        applyTextColor(this,receiptStepsText, isDarkMode)
+        applyTextColor(this,receiptImageText, isDarkMode)
 
         val btnExit = findViewById<ImageView>(R.id.backBtn)
+        btnExit.setImageResource(
+            if (isDarkMode) R.drawable.baseline_arrow_back_24_white else R.drawable.baseline_arrow_back_24
+        )
         btnExit.setOnClickListener {
             onBackPressed()
         }
@@ -114,17 +89,8 @@ class AddActivity : AppCompatActivity() {
         spinner.adapter = adapter
         spinnerSub.adapter = adapterSub
 
-        if (ContextCompat.checkSelfPermission(
-                this,
-                android.Manifest.permission.READ_EXTERNAL_STORAGE
-            ) != PackageManager.PERMISSION_GRANTED
-        ) {
-            ActivityCompat.requestPermissions(
-                this,
-                arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE),
-                1
-            )
-        }
+        requestPermission(android.Manifest.permission.READ_EXTERNAL_STORAGE, REQUEST_CODE)
+
         addImage.setOnClickListener {
             val intent =
                 Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
@@ -237,10 +203,18 @@ class AddActivity : AppCompatActivity() {
         else{
             dbHelper.addFood(item!!, userId)
             Toast.makeText(this, "Receipt created successfully", Toast.LENGTH_LONG).show()
-            nameReceipt.text.clear()
-            ingReceipt.text.clear()
-            descReceipt.text.clear()
+            clearFields()
         }
+    }
+    private fun requestPermission(permission: String, requestCode: Int) {
+        if (ContextCompat.checkSelfPermission(this, permission) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, arrayOf(permission), requestCode)
+        }
+    }
+    private fun clearFields() {
+        nameReceipt.text.clear()
+        ingReceipt.text.clear()
+        descReceipt.text.clear()
     }
 
 }

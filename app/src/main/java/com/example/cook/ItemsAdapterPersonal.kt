@@ -59,7 +59,6 @@ class ItemsAdapterPersonal(private var items: List<Item>): RecyclerView.Adapter<
             val context = holder.itemView.context
             val intent = Intent(context, ViewItemActivity::class.java)
             intent.putExtra("itemTitle", items[position].name)
-            intent.putExtra("createdByYou", true)
 
             context.startActivity(intent)
         }

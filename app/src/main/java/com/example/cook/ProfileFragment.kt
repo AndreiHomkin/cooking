@@ -50,18 +50,8 @@ class ProfileFragment : Fragment() {
         val settingsPreferences = requireContext().getSharedPreferences("Settings", Context.MODE_PRIVATE)
         var isDarkMode = settingsPreferences.getBoolean("isDarkMode", false)
 
-        textProfile.setTextColor(
-            ContextCompat.getColor(
-                requireContext(),
-                if (isDarkMode) R.color.white else R.color.black
-            )
-        )
-        profileName.setTextColor(
-            ContextCompat.getColor(
-                requireContext(),
-                if (isDarkMode) R.color.white else R.color.black
-            )
-        )
+        applyTextColor(requireContext(), textProfile, isDarkMode)
+        applyTextColor(requireContext(), profileName, isDarkMode)
 
         profileBack.setBackgroundResource(
             if (isDarkMode) R.drawable.dark_pattern_design else R.drawable.pattern_design
@@ -108,18 +98,8 @@ class ProfileFragment : Fragment() {
             editor.putBoolean("isDarkMode", isDarkMode)
             editor.apply()
 
-            textProfile.setTextColor(
-                ContextCompat.getColor(
-                    requireContext(),
-                    if (isDarkMode) R.color.white else R.color.black
-                )
-            )
-            profileName.setTextColor(
-                ContextCompat.getColor(
-                    requireContext(),
-                    if (isDarkMode) R.color.white else R.color.black
-                )
-            )
+            applyTextColor(requireContext(), textProfile, isDarkMode)
+            applyTextColor(requireContext(), profileName, isDarkMode)
 
             profileBack?.setBackgroundResource(
                 if (isDarkMode) R.drawable.dark_pattern_design else R.drawable.pattern_design

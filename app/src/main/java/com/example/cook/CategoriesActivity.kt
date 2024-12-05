@@ -31,19 +31,14 @@ class CategoriesActivity: AppCompatActivity() {
 
         val bgCategory = findViewById<ScrollView>(R.id.bgCategory)
 
-        catNameTextView.setTextColor(
-            ContextCompat.getColor(
-                this,
-                if (isDarkMode) R.color.white else R.color.black
-            )
-        )
+        applyTextColor(this, catNameTextView, isDarkMode)
 
         bgCategory.setBackgroundResource(
             if (isDarkMode) R.drawable.dark_pattern_design else R.drawable.pattern_design
         )
 
-        buttonExit.setBackgroundResource(
-            if (isDarkMode) R.drawable.baseline_arrow_back_24 else R.drawable.baseline_arrow_back_24_white
+        buttonExit.setImageResource(
+            if (isDarkMode) R.drawable.baseline_arrow_back_24_white else R.drawable.baseline_arrow_back_24
         )
 
         if(categoryName.isNullOrEmpty()){

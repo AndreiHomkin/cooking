@@ -53,59 +53,23 @@ class AddFragment : Fragment() {
         val settingsPreferences = requireContext().getSharedPreferences("Settings", Context.MODE_PRIVATE)
         val isDarkMode = settingsPreferences.getBoolean("isDarkMode", false)
 
-        val btnAddItem = view.findViewById<ImageView>(R.id.addReceipt)
-        val bgAdd = view.findViewById<ScrollView>(R.id.addBack)
-        val textAdd = view.findViewById<TextView>(R.id.catNameActivity)
-        val textWarning = view.findViewById<TextView>(R.id.warning)
-
-        bgAdd.setBackgroundResource(
-            if (isDarkMode) R.drawable.dark_pattern_design else R.drawable.pattern_design
-        )
-        textAdd.setTextColor(
-            ContextCompat.getColor(
-                requireContext(),
-                if (isDarkMode) R.color.white else R.color.black
-            )
-        )
-        textWarning.setTextColor(
-            ContextCompat.getColor(
-                requireContext(),
-                if (isDarkMode) R.color.white else R.color.black
-            )
-        )
-
-        btnAddItem.setOnClickListener {
-            val intent = Intent(requireContext(), AddActivity::class.java)
-            startActivityForResult(intent, REQUEST_CODE_ADD)
-        }
+        setupUI(view, isDarkMode)
 
         return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        dbHelper = DbHelper(requireContext(), null)
-        val sharedPreferencesUser = requireContext().getSharedPreferences("UserPrefs", Context.MODE_PRIVATE)
-        val userName = sharedPreferencesUser.getString("userName", "Unknown")
-        val userId = dbHelper.getUserId(userName!!)
-        itemsArrayList = ArrayList(dbHelper.getFoodsByUser(userId))
-        val btnAddItem = view.findViewById<ImageView>(R.id.addReceipt)
-        val textWarning = view.findViewById<TextView>(R.id.warning)
-        if(userName == "Unknown"){
-            btnAddItem.visibility = View.INVISIBLE
-            textWarning.visibility = View.VISIBLE
-        }
-        else{
-            btnAddItem.visibility = View.VISIBLE
-            textWarning.visibility = View.GONE
-        }
 
-        val layoutManager = GridLayoutManager(context, 2)
-        recycler = view.findViewById(R.id.foodList)
-        recycler.layoutManager = layoutManager
-        recycler.hasFixedSize()
-        adapter = ItemsAdapterPersonal(itemsArrayList)
-        recycler.adapter = adapter
+        dbHelper = DbHelper(requireContext(), null)
+        itemsArrayList = ArrayList()
+
+        val sharedPreferencesUser = requireContext().getSharedPreferences("UserPrefs", Context.MODE_PRIVATE)
+        val userName = sharedPreferencesUser.getString("userName", "Unknown") ?: "Unknown"
+        val userId = dbHelper.getUserId(userName)
+
+        setupRecyclerView(view)
+        updateUIForUser(view, userName, userId)
     }
 
     companion object {
@@ -113,11 +77,52 @@ class AddFragment : Fragment() {
     }
     @SuppressLint("NotifyDataSetChanged")
     private fun refreshItems() {
-        val sharedPreferencesUser = requireContext().getSharedPreferences("UserPrefs", Context.MODE_PRIVATE)
-        val userName = sharedPreferencesUser.getString("userName", "Unknown")
-        val userId = dbHelper.getUserId(userName!!)
+        val userId = getUserId()
         itemsArrayList.clear()
         itemsArrayList.addAll(dbHelper.getFoodsByUser(userId))
         adapter.notifyDataSetChanged()
+    }
+    private fun setupUI(view: View, isDarkMode: Boolean) {
+        val bgAdd = view.findViewById<ScrollView>(R.id.addBack)
+        val textAdd = view.findViewById<TextView>(R.id.catNameActivity)
+        val textWarning = view.findViewById<TextView>(R.id.warning)
+        val btnAddItem = view.findViewById<ImageView>(R.id.addReceipt)
+
+        bgAdd.setBackgroundResource(if (isDarkMode) R.drawable.dark_pattern_design else R.drawable.pattern_design)
+        applyTextColor(requireContext(), textAdd, isDarkMode)
+        applyTextColor(requireContext(), textWarning, isDarkMode)
+
+        btnAddItem.setOnClickListener {
+            val intent = Intent(requireContext(), AddActivity::class.java)
+            startActivityForResult(intent, 1)
+        }
+    }
+
+    private fun setupRecyclerView(view: View) {
+        recycler = view.findViewById(R.id.foodList)
+        recycler.layoutManager = GridLayoutManager(context, 2)
+        recycler.setHasFixedSize(true)
+
+        adapter = ItemsAdapterPersonal(itemsArrayList)
+        recycler.adapter = adapter
+    }
+
+    private fun updateUIForUser(view: View, userName: String, userId: Int) {
+        val btnAddItem = view.findViewById<ImageView>(R.id.addReceipt)
+        val textWarning = view.findViewById<TextView>(R.id.warning)
+
+        if (userName == "Unknown") {
+            btnAddItem.visibility = View.INVISIBLE
+            textWarning.visibility = View.VISIBLE
+        } else {
+            btnAddItem.visibility = View.VISIBLE
+            textWarning.visibility = View.GONE
+            refreshItems()
+        }
+    }
+    private fun getUserId(): Int {
+        val sharedPreferencesUser = requireContext().getSharedPreferences("UserPrefs", Context.MODE_PRIVATE)
+        val userName = sharedPreferencesUser.getString("userName", "Unknown") ?: "Unknown"
+        return dbHelper.getUserId(userName)
     }
 }
