@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -18,6 +17,8 @@ private const val ARG_PARAM2 = "param2"
 class HomeFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
+
+    private var isDataLoaded = false
 
     private lateinit var adapter: ItemsAdapter
     private lateinit var adapterCategory: CategoryAdapter
@@ -74,24 +75,24 @@ class HomeFragment : Fragment() {
         dataInitialiseCategory1()
         dataAdd()
 
-        itemsArrayList = getOrSetInitialRecipes()
+        if (!isDataLoaded) {
+            itemsArrayList = getOrSetInitialRecipes()
+            isDataLoaded = true
+        }
 
         val layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         recycler = view.findViewById(R.id.targetsList)
         recycler.layoutManager = layoutManager
         recycler.hasFixedSize()
-
         recycler.addItemDecoration(SpacesItemDecoration(30))
 
         adapter = ItemsAdapter(itemsArrayList)
         recycler.adapter = adapter
 
-        val layoutManagerCategory =
-            LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        val layoutManagerCategory = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         recycler1 = view.findViewById(R.id.todaysList)
         recycler1.layoutManager = layoutManagerCategory
         recycler1.hasFixedSize()
-
         recycler1.addItemDecoration(SpacesItemDecoration(30))
 
         adapterCategory = CategoryAdapter(categoriesArrayList)
@@ -324,20 +325,20 @@ class HomeFragment : Fragment() {
     private fun getOrSetInitialRecipes(): ArrayList<Item> {
         val sharedPreferences = requireContext().getSharedPreferences("app_preferences", Context.MODE_PRIVATE)
 
-        val savedRecipes = sharedPreferences.getStringSet("initial_recipes", null)
+        val isFirstRun = sharedPreferences.getBoolean("is_first_run", true)
 
-        return if (savedRecipes != null) {
+        return if (!isFirstRun) {
+            val savedRecipes = sharedPreferences.getStringSet("initial_recipes", null)
             ArrayList(
-                savedRecipes.mapNotNull { recipeName ->
-                    dbHelper.getFoodByName(recipeName)
-                }
+                savedRecipes?.mapNotNull { recipeName -> dbHelper.getFoodByName(recipeName) } ?: emptyList()
             )
         } else {
-            val allRecipes = ArrayList(dbHelper.getAllFoods())
+            val allRecipes = dbHelper.getAllFoods()
             val randomRecipes = allRecipes.shuffled().take(5)
 
             sharedPreferences.edit()
                 .putStringSet("initial_recipes", randomRecipes.map { it.name }.toSet())
+                .putBoolean("is_first_run", false)
                 .apply()
 
             ArrayList(randomRecipes)

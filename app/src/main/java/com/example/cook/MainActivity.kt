@@ -59,12 +59,6 @@ class MainActivity : AppCompatActivity() {
                 true
             }
 
-            val sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE)
-            val isLoggedIn = sharedPreferences.getBoolean("isLoggedIn", false)
-            if (isLoggedIn) {
-                val userName = sharedPreferences.getString("userName", "Guest")
-            }
-
             val sharedPreferences123 = getSharedPreferences("app_preferences", Context.MODE_PRIVATE)
             val isAppOpen = sharedPreferences123.getBoolean("isAppOpen", false)
             if (!isAppOpen) {
@@ -122,9 +116,12 @@ class MainActivity : AppCompatActivity() {
         val capabilities = connectivityManager.getNetworkCapabilities(networkCapabilities) ?: return false
         return capabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
     }
-    private fun makeCurrentFragment(fragment: Fragment) =
-        supportFragmentManager.beginTransaction().apply{
-            replace(R.id.frame_layout, fragment)
-            commit()
+    private fun makeCurrentFragment(fragment: Fragment) {
+        val currentFragment = supportFragmentManager.findFragmentById(R.id.frame_layout)
+        if (currentFragment != fragment) {
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.frame_layout, fragment)
+                .commit()
         }
+    }
 }
