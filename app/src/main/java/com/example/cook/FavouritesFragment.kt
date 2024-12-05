@@ -107,13 +107,19 @@ class FavouritesFragment : Fragment() {
     }
     @SuppressLint("NotifyDataSetChanged")
     private fun refreshItems() {
+        if (!::adapter.isInitialized || !::recycler.isInitialized) {
+            return
+        }
+
         val sharedPreferencesUser = requireContext().getSharedPreferences("UserPrefs", Context.MODE_PRIVATE)
         val userName = sharedPreferencesUser.getString("userName", "Unknown")
         val userId = dbHelper.getUserId(userName!!)
         val updatedFavorites = dbHelper.getFavoritesByUser(userId)
+
         itemsArrayList.clear()
         itemsArrayList.addAll(updatedFavorites)
         adapter.notifyDataSetChanged()
+
         val warningNo = view?.findViewById<TextView>(R.id.warningNo)
         if (itemsArrayList.isEmpty()) {
             warningNo?.visibility = View.VISIBLE
