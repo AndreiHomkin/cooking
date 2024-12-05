@@ -12,10 +12,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ScrollView
 import android.widget.TextView
-import androidx.activity.result.ActivityResultLauncher
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
@@ -120,14 +117,21 @@ class FavouritesFragment : Fragment() {
         itemsArrayList.addAll(updatedFavorites)
         adapter.notifyDataSetChanged()
 
+        val warningText = view?.findViewById<TextView>(R.id.warningFav)
         val warningNo = view?.findViewById<TextView>(R.id.warningNo)
-        if (itemsArrayList.isEmpty()) {
+        if(userName == "Unknown"){
+            warningText?.visibility = View.VISIBLE
+        }
+        else if(itemsArrayList.isEmpty()){
             warningNo?.visibility = View.VISIBLE
             recycler.visibility = View.GONE
-        } else {
+        }
+        else{
+            warningText?.visibility = View.GONE
             warningNo?.visibility = View.GONE
             recycler.visibility = View.VISIBLE
         }
+
     }
 
     override fun onResume() {
