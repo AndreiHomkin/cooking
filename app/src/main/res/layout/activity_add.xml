@@ -18,7 +18,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.044"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="Back" />
 
     <TextView
         android:id="@+id/receiptNameText"
@@ -56,10 +57,14 @@
         android:layout_height="50dp"
         android:layout_marginTop="92dp"
         android:fontFamily="@font/gilroy_light"
+        android:digits="abcdefghijklmnopqrstuvwxyz0123456789
+        _ABCDEFGHIJKLM
+        NOPQRTSUVWXYZАБВГДЕЁЖЗИЙКЛ
+        МНОПРСТУФХЦЧШЩЪЫЬЭЮЯабвгдеёжзийклмнопрстуфхцчшщъыьэюя"
         android:gravity="center"
         android:hint="@string/receipt_name"
         android:inputType="text"
-        android:maxLength="30"
+        android:maxLength="16"
         android:textColor="#000000"
         android:textColorHint="#6a6a6a"
         app:layout_constraintEnd_toEndOf="parent"
@@ -118,7 +123,7 @@
         android:gravity="center"
         android:hint="@string/ingredients"
         android:inputType="textCapSentences|textMultiLine"
-        android:maxLength="2000"
+        android:maxLength="30"
         android:maxLines="2"
         android:textColor="#000000"
         android:textColorHint="#6a6a6a"
@@ -176,7 +181,8 @@
         app:layout_constraintHorizontal_bias="0.945"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/receiptDesc"
-        app:srcCompat="@drawable/dinner" />
+        app:srcCompat="@drawable/dinner"
+        android:contentDescription="Image" />
 
     <TextView
         android:id="@+id/textView5"

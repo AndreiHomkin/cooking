@@ -40,6 +40,10 @@ class FavouritesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val settingsPreferences = requireContext().getSharedPreferences("Settings", Context.MODE_PRIVATE)
+        val isDarkMode = settingsPreferences.getBoolean("isDarkMode", false)
+
         dbHelper = DbHelper(requireContext(), null)
 
         val warningText = view.findViewById<TextView>(R.id.warningFav)
@@ -62,7 +66,7 @@ class FavouritesFragment : Fragment() {
             recycler = view.findViewById(R.id.favouritesList)
             recycler.layoutManager = layoutManager
             recycler.hasFixedSize()
-            adapter = ItemsAdapter(itemsArrayList)
+            adapter = ItemsAdapter(itemsArrayList, isDarkMode)
             recycler.adapter = adapter
         }
     }

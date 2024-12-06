@@ -9,16 +9,19 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 
-class ItemsAdapter(private var items: List<Item>): RecyclerView.Adapter<ItemsAdapter.MyViewHolder>() {
+class ItemsAdapter(private var items: List<Item>, private val isDarkMode: Boolean): RecyclerView.Adapter<ItemsAdapter.MyViewHolder>() {
     class MyViewHolder(view: View): RecyclerView.ViewHolder(view){
         val image: ImageView = view.findViewById(R.id.item_list_image)
         val title: TextView = view.findViewById(R.id.item_list_title)
         val desc: TextView = view.findViewById(R.id.item_list_desk)
         val button: Button = view.findViewById(R.id.item_list_button)
+        val container: LinearLayout = view.findViewById(R.id.containerInList)
         val context = view.context!!
     }
 
@@ -52,6 +55,15 @@ class ItemsAdapter(private var items: List<Item>): RecyclerView.Adapter<ItemsAda
             intent.putExtra("itemTitle", items[position].name)
 
             context.startActivity(intent)
+        }
+        if (isDarkMode) {
+            holder.title.setTextColor(ContextCompat.getColor(holder.itemView.context, R.color.white))
+            holder.desc.setTextColor(ContextCompat.getColor(holder.itemView.context, R.color.white))
+            holder.container.setBackgroundResource(R.drawable.border)
+        } else {
+            holder.title.setTextColor(ContextCompat.getColor(holder.itemView.context, R.color.black))
+            holder.desc.setTextColor(ContextCompat.getColor(holder.itemView.context, R.color.black))
+            holder.container.setBackgroundResource(R.drawable.border_white)
         }
     }
 }

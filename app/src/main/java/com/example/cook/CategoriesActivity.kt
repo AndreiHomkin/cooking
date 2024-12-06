@@ -60,6 +60,8 @@ class CategoriesActivity: AppCompatActivity() {
 
     }
     private fun loadFoodByCategory(category: String?, subCategory: String?) {
+        val settingsPreferences = getSharedPreferences("Settings", Context.MODE_PRIVATE)
+        val isDarkMode = settingsPreferences.getBoolean("isDarkMode", false)
         val foodList: List<Item> = when {
             !category.isNullOrEmpty() -> {
                 dbHelper.getFoodsByCategory(category)
@@ -72,7 +74,7 @@ class CategoriesActivity: AppCompatActivity() {
             }
         }
         itemsArrayList.addAll(foodList)
-        adapter = ItemsAdapter(itemsArrayList)
+        adapter = ItemsAdapter(itemsArrayList, isDarkMode)
         recyclerView.adapter = adapter
     }
 }

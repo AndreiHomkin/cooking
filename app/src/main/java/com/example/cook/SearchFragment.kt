@@ -1,6 +1,7 @@
 package com.example.cook
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -33,6 +34,10 @@ class SearchFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val settingsPreferences = requireContext().getSharedPreferences("Settings", Context.MODE_PRIVATE)
+        val isDarkMode = settingsPreferences.getBoolean("isDarkMode", false)
+
         recycler = view.findViewById(R.id.recyclerView)
         searchView = view.findViewById(R.id.searchView)
 
@@ -44,7 +49,7 @@ class SearchFragment : Fragment() {
         recycler = view.findViewById(R.id.recyclerView)
         recycler.layoutManager = layoutManager
         recycler.hasFixedSize()
-        adapter = ItemsAdapter(filteredList)
+        adapter = ItemsAdapter(filteredList, isDarkMode)
         recycler.adapter = adapter
 
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {

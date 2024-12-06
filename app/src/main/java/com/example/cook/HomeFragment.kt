@@ -70,6 +70,9 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val settingsPreferences = requireContext().getSharedPreferences("Settings", Context.MODE_PRIVATE)
+        val isDarkMode = settingsPreferences.getBoolean("isDarkMode", false)
+
         dbHelper = DbHelper(requireContext(), null)
         dataInitialiseCategory()
         dataInitialiseCategory1()
@@ -86,7 +89,7 @@ class HomeFragment : Fragment() {
         recycler.hasFixedSize()
         recycler.addItemDecoration(SpacesItemDecoration(30))
 
-        adapter = ItemsAdapter(itemsArrayList)
+        adapter = ItemsAdapter(itemsArrayList, isDarkMode)
         recycler.adapter = adapter
 
         val layoutManagerCategory = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
@@ -95,14 +98,14 @@ class HomeFragment : Fragment() {
         recycler1.hasFixedSize()
         recycler1.addItemDecoration(SpacesItemDecoration(30))
 
-        adapterCategory = CategoryAdapter(categoriesArrayList)
+        adapterCategory = CategoryAdapter(categoriesArrayList, isDarkMode)
         recycler1.adapter = adapterCategory
 
         val layoutManagerCategory1 = GridLayoutManager(context, 2)
         recycler2 = view.findViewById(R.id.categoriesList)
         recycler2.layoutManager = layoutManagerCategory1
         recycler2.hasFixedSize()
-        adapterSubCategory = SubCategoryAdapter(categoriesArrayList1)
+        adapterSubCategory = SubCategoryAdapter(categoriesArrayList1, isDarkMode)
         recycler2.adapter = adapterSubCategory
 
     }

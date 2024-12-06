@@ -5,13 +5,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 
-class CategoryAdapter(private var categories: List<Category>): RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>() {
+class CategoryAdapter(private var categories: List<Category>, private val isDarkMode: Boolean): RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>() {
     class CategoryViewHolder(view: View): RecyclerView.ViewHolder(view){
         val image: ImageView = view.findViewById(R.id.categoryImg)
         val title: TextView = view.findViewById(R.id.categoryName)
+        val container: LinearLayout = view.findViewById(R.id.containerInCategory)
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.category_in_list, parent, false)
@@ -32,6 +35,13 @@ class CategoryAdapter(private var categories: List<Category>): RecyclerView.Adap
             val intent = Intent(context, CategoriesActivity::class.java)
             intent.putExtra("catName", category.name)
             context.startActivity(intent)
+        }
+        if (isDarkMode) {
+            holder.title.setTextColor(ContextCompat.getColor(holder.itemView.context, R.color.white))
+            holder.container.setBackgroundResource(R.drawable.border)
+        } else {
+            holder.title.setTextColor(ContextCompat.getColor(holder.itemView.context, R.color.black))
+            holder.container.setBackgroundResource(R.drawable.border_white)
         }
     }
 }
