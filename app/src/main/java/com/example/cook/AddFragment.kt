@@ -99,11 +99,13 @@ class AddFragment : Fragment() {
     }
 
     private fun setupRecyclerView(view: View) {
+        val settingsPreferences = requireContext().getSharedPreferences("Settings", Context.MODE_PRIVATE)
+        val isDarkMode = settingsPreferences.getBoolean("isDarkMode", false)
+
         recycler = view.findViewById(R.id.foodList)
         recycler.layoutManager = GridLayoutManager(context, 2)
-        recycler.setHasFixedSize(true)
 
-        adapter = ItemsAdapterPersonal(itemsArrayList)
+        adapter = ItemsAdapterPersonal(itemsArrayList, isDarkMode)
         recycler.adapter = adapter
     }
 

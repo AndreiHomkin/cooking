@@ -227,7 +227,7 @@ class HomeFragment : Fragment() {
                 subcategory = "Main Dishes",
                 desc = "Rappie Pie is a traditional Acadian dish made with grated potatoes, meat, and a rich broth.",
                 ingredients = "Potatoes, chicken, pork, onions, butter, broth",
-                image = "https://www.themealdb.com/images/media/meals/ruwpww1511817242.jpg"
+                image = "https://www.yarmouthandacadianshores.com/content/uploads/2021/05/rappie-pie-1214x680.jpg"
             ),
             Item(
                 name = "Split Pea Soup",
