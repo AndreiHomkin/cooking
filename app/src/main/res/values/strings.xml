@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name" translatable="false">Cook</string>
+    <string name="app_name">Cook</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
     <string name="login_to_add_receipts">Login to add receipts</string>
@@ -35,4 +35,141 @@
     <string name="categories">Categories</string>
     <string name="logout_from_account">Logout from account</string>
     <string name="profile">Profile</string>
+    <string name="exit_app_title">Exit from the app</string>
+    <string name="exit_app_message">Are you sure you want to quit?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="error_title">Error</string>
+    <string name="error_message">There is no internet connection. The application cannot be used without an internet connection.</string>
+    <string name="ok">OK</string>
+    <string name="home_menu">Home</string>
+    <string name="favourites_menu">Favourites</string>
+    <string name="add_menu">Add</string>
+    <string name="settings_menu">Search</string>
+    <string name="profile_menu">Profile</string>
+    <string name="breakfast">Breakfast</string>
+    <string name="lunch">Lunch</string>
+    <string name="dinner">Dinner</string>
+    <string name="supper">Supper</string>
+    <string name="appetizers">Appetizers</string>
+    <string name="salads">Salads</string>
+    <string name="main_dishes">Main Dishes</string>
+    <string name="soups">Soups</string>
+    <string name="desserts">Desserts</string>
+    <string name="drinks">Drinks</string>
+    <!-- BeaverTails -->
+    <string name="beavertails_title">BeaverTails</string>
+    <string name="beavertails_descr">BeaverTails are a Canadian fried dough pastry served with various toppings like sugar, cinnamon, and chocolate.</string>
+    <string name="beavertails_ingr">Flour, water, sugar, cinnamon, chocolate sauce</string>
+
+    <!-- Breakfast Potatoes -->
+    <string name="breakfastpotatoes_title">Breakfast Potatoes</string>
+    <string name="breakfastpotatoes_descr">A classic breakfast side dish of crispy roasted potatoes with onions and bell peppers.</string>
+    <string name="breakfastpotatoes_ingr">Potatoes, onions, bell peppers, olive oil, salt, pepper</string>
+
+    <!-- Canadian Butter Tarts -->
+    <string name="canadianbuttertarts_title">Canadian Butter Tarts</string>
+    <string name="canadianbuttertarts_descr">A quintessential Canadian dessert, these butter tarts are rich and gooey with a caramel-like filling.</string>
+    <string name="canadianbuttertarts_ingr">Butter, sugar, eggs, vanilla, maple syrup, raisins, walnuts</string>
+
+    <!-- Montreal Smoked Meat -->
+    <string name="montrealsmokedmeat_title">Montreal Smoked Meat</string>
+    <string name="montrealsmokedmeat_descr">Montreal Smoked Meat is a type of kosher-style deli meat, typically served on rye bread with mustard.</string>
+    <string name="montrealsmokedmeat_ingr">Beef brisket, kosher salt, black pepper, garlic, rye bread, mustard</string>
+
+    <!-- Nanaimo Bars -->
+    <string name="nanaimobars_title">Nanaimo Bars</string>
+    <string name="nanaimobars_descr">A Canadian no-bake dessert bar consisting of a crumbly base, a custard middle layer, and a chocolate topping.</string>
+    <string name="nanaimobars_ingr">Butter, sugar, cocoa powder, eggs, custard powder, chocolate chips</string>
+
+    <!-- Pate Chinois -->
+    <string name="patechinois_title">Pate Chinois</string>
+    <string name="patechinois_descr">Pate Chinois is a Canadian casserole made with layers of ground beef, corn, and mashed potatoes.</string>
+    <string name="patechinois_ingr">Ground beef, corn, mashed potatoes, onions, garlic, butter</string>
+
+    <!-- Pouding Chomeur -->
+    <string name="poudingchomeur_title">Pouding Chomeur</string>
+    <string name="poudingchomeur_descr">Pouding chomeur is a classic Quebecois dessert made with a moist cake topped with hot syrup.</string>
+    <string name="poudingchomeur_ingr">Flour, sugar, butter, maple syrup, vanilla, baking powder</string>
+
+    <!-- Poutine -->
+    <string name="poutine_title">Poutine</string>
+    <string name="poutine_descr">A beloved Canadian dish made of fries topped with cheese curds and smothered in gravy.</string>
+    <string name="poutine_ingr">French fries, cheese curds, brown gravy</string>
+
+    <!-- Rappie Pie -->
+    <string name="rappiepie_title">Rappie Pie</string>
+    <string name="rappiepie_descr">Rappie Pie is a traditional Acadian dish made with grated potatoes, meat, and a rich broth.</string>
+    <string name="rappiepie_ingr">Potatoes, chicken, pork, onions, butter, broth</string>
+
+    <!-- Split Pea Soup -->
+    <string name="splitpeasoup_title">Split Pea Soup</string>
+    <string name="splitpeasoup_descr">A hearty and flavorful soup made with split peas, vegetables, and herbs.</string>
+    <string name="splitpeasoup_ingr">Split peas, carrots, onions, celery, garlic, bay leaves, thyme</string>
+
+    <!-- Sugar Pie -->
+    <string name="sugarpie_title">Sugar Pie</string>
+    <string name="sugarpie_descr">Sugar pie is a rich Canadian dessert made with a sweet, caramel-like filling.</string>
+    <string name="sugarpie_ingr">Butter, sugar, brown sugar, cream, flour, vanilla</string>
+
+    <!-- Timbits -->
+    <string name="timbits_title">Timbits</string>
+    <string name="timbits_descr">Timbits are small doughnut holes that are a Canadian favorite, often dipped in sugar or glazed.</string>
+    <string name="timbits_ingr">Flour, sugar, butter, eggs, yeast, milk, chocolate, glaze</string>
+
+    <!-- Tourtiere -->
+    <string name="tourtiere_title">Tourtiere</string>
+    <string name="tourtiere_descr">Tourtiere is a traditional Canadian meat pie made with ground pork, beef, and a mix of spices.</string>
+    <string name="tourtiere_ingr">Ground pork, ground beef, onions, garlic, pie crust, spices</string>
+
+    <!-- Eggs Benedict -->
+    <string name="eggsbenedict_title">Eggs Benedict</string>
+    <string name="eggsbenedict_descr">A classic breakfast dish with poached eggs, English muffins, Canadian bacon, and hollandaise sauce.</string>
+    <string name="eggsbenedict_ingr">Eggs, English muffins, Canadian bacon, hollandaise sauce</string>
+
+    <!-- Caesar Salad -->
+    <string name="caesarsalad_title">Caesar Salad</string>
+    <string name="caesarsalad_descr">A classic Caesar salad with crisp romaine lettuce, creamy dressing, crunchy croutons, and parmesan cheese.</string>
+    <string name="caesarsalad_ingr">Romaine lettuce, Caesar dressing, croutons, parmesan cheese</string>
+
+    <!-- Tiramisu -->
+    <string name="tiramisu_title">Tiramisu</string>
+    <string name="tiramisu_descr">A popular Italian dessert made of layers of coffee-soaked ladyfingers, mascarpone cheese, and cocoa powder.</string>
+    <string name="tiramisu_ingr">Ladyfingers, mascarpone cheese, coffee, cocoa powder, sugar, eggs</string>
+
+    <!-- Guacamole -->
+    <string name="guacamole_title">Guacamole</string>
+    <string name="guacamole_descr">A creamy avocado dip flavored with lime, garlic, and cilantro, perfect with tortilla chips or as a topping.</string>
+    <string name="guacamole_ingr">Avocados, lime, garlic, cilantro, onions, salt</string>
+
+    <!-- Vegetable Stir-Fry -->
+    <string name="vegetablestirfry_title">Vegetable Stir-Fry</string>
+    <string name="vegetablestirfry_descr">A quick and healthy stir-fry with mixed vegetables and a savory soy sauce-based sauce.</string>
+    <string name="vegetablestirfry_ingr">Broccoli, carrots, bell peppers, soy sauce, garlic, ginger, olive oil</string>
+
+    <!-- Churros -->
+    <string name="churros_title">Churros</string>
+    <string name="churros_descr">Fried dough pastry dusted with cinnamon sugar, often served with chocolate or caramel sauce.</string>
+    <string name="churros_ingr">Flour, sugar, cinnamon, butter, eggs, oil, chocolate sauce</string>
+
+    <!-- Lemonade -->
+    <string name="lemonade_title">Lemonade</string>
+    <string name="lemonade_descr">A refreshing drink made with fresh lemons, sugar, and water.</string>
+    <string name="lemonade_ingr">Lemons, sugar, water</string>
+    <string name="you_are_not_logged_in_yet">You are not logged in yet</string>
+    <string name="receipt_already_exist">Receipt already exist</string>
+    <string name="receipt_created_successfully">Receipt created successfully</string>
+    <string name="select_image">Select any image</string>
+    <string name="fill_all_fields">Fill all fields first</string>
+    <string name="view">View</string>
+    <string name="delete">Delete</string>
+    <string name="search_here">Search here...</string>
+    <string name="you_logged_out_from_your_account">You logged out from your account</string>
+    <string name="data_is_incorrect">Data is incorrect</string>
+    <string name="user_logged_in">User %1$s logged in</string>
+    <string name="user_already_exist">User %1$s already exist</string>
+    <string name="email_is_already_used">Email %1$s is already used</string>
+    <string name="email_is_incorrect">Email is incorrect</string>
+    <string name="too_simple_password">Too simple password</string>
+    <string name="user_got_added">User %1$s got added</string>
 </resources>

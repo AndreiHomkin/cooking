@@ -73,13 +73,15 @@ class HomeFragment : Fragment() {
         val settingsPreferences = requireContext().getSharedPreferences("Settings", Context.MODE_PRIVATE)
         val isDarkMode = settingsPreferences.getBoolean("isDarkMode", false)
 
+        val sharedPreferencesLang = requireContext().getSharedPreferences("language", Context.MODE_PRIVATE)
+        val language = sharedPreferencesLang.getString("selected_language", "ru")
+
         dbHelper = DbHelper(requireContext(), null)
         dataInitialiseCategory()
         dataInitialiseCategory1()
-        dataAdd()
-
+        dataAdd(language.toString())
         if (!isDataLoaded) {
-            itemsArrayList = getOrSetInitialRecipes()
+            itemsArrayList = getOrSetInitialRecipes(language!!)
             isDataLoaded = true
         }
 
@@ -120,10 +122,10 @@ class HomeFragment : Fragment() {
             R.drawable.supper
         )
         nameCat = arrayOf(
-            "Breakfast",
-            "Lunch",
-            "Dinner",
-            "Supper"
+            getString(R.string.breakfast),
+            getString(R.string.lunch),
+            getString(R.string.dinner),
+            getString(R.string.supper)
         )
         for(i in imageCat.indices){
             val categories = Category(nameCat[i], imageCat[i])
@@ -142,12 +144,12 @@ class HomeFragment : Fragment() {
             R.drawable.drinks
         )
         nameCat = arrayOf(
-            "Appetizers",
-            "Salads",
-            "Main Dishes",
-            "Soups",
-            "Desserts",
-            "Drinks"
+            getString(R.string.appetizers),
+            getString(R.string.salads),
+            getString(R.string.main_dishes),
+            getString(R.string.soups),
+            getString(R.string.desserts),
+            getString(R.string.drinks)
         )
         for(i in imageCat.indices){
             val categories = Category(nameCat[i], imageCat[i])
@@ -155,196 +157,195 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private fun dataAdd(){
+    private fun dataAdd(lang: String){
         val recipes = listOf(
             Item(
-                name = "BeaverTails",
-                category = "Supper",
-                subcategory = "Appetizers",
-                desc = "BeaverTails are a Canadian fried dough pastry served with various toppings like sugar, cinnamon, and chocolate.",
-                ingredients = "Flour, water, sugar, cinnamon, chocolate sauce",
+                name = getString(R.string.beavertails_title),
+                category = getString(R.string.supper),
+                subcategory = getString(R.string.appetizers),
+                desc = getString(R.string.beavertails_descr),
+                ingredients = getString(R.string.beavertails_ingr),
                 image = "https://www.themealdb.com/images/media/meals/ryppsv1511815505.jpg"
             ),
             Item(
-                name = "Breakfast Potatoes",
-                category = "Breakfast",
-                subcategory = "Desserts",
-                desc = "A classic breakfast side dish of crispy roasted potatoes with onions and bell peppers.",
-                ingredients = "Potatoes, onions, bell peppers, olive oil, salt, pepper",
+                name = getString(R.string.breakfastpotatoes_title),
+                category = getString(R.string.breakfast),
+                subcategory = getString(R.string.desserts),
+                desc = getString(R.string.breakfastpotatoes_descr),
+                ingredients = getString(R.string.breakfastpotatoes_ingr),
                 image = "https://www.themealdb.com/images/media/meals/1550441882.jpg"
             ),
             Item(
-                name = "Canadian Butter Tarts",
-                category = "Dinner",
-                subcategory = "Main Dishes",
-                desc = "A quintessential Canadian dessert, these butter tarts are rich and gooey with a caramel-like filling.",
-                ingredients = "Butter, sugar, eggs, vanilla, maple syrup, raisins, walnuts",
+                name = getString(R.string.canadianbuttertarts_title),
+                category = getString(R.string.dinner),
+                subcategory = getString(R.string.main_dishes),
+                desc = getString(R.string.canadianbuttertarts_descr),
+                ingredients = getString(R.string.canadianbuttertarts_ingr),
                 image = "https://www.themealdb.com/images/media/meals/wpputp1511812960.jpg"
             ),
             Item(
-                name = "Montreal Smoked Meat",
-                category = "Lunch",
-                subcategory = "Main Dishes",
-                desc = "Montreal Smoked Meat is a type of kosher-style deli meat, typically served on rye bread with mustard.",
-                ingredients = "Beef brisket, kosher salt, black pepper, garlic, rye bread, mustard",
+                name = getString(R.string.montrealsmokedmeat_title),
+                category = getString(R.string.lunch),
+                subcategory = getString(R.string.main_dishes),
+                desc = getString(R.string.montrealsmokedmeat_descr),
+                ingredients = getString(R.string.montrealsmokedmeat_ingr),
                 image = "https://www.themealdb.com/images/media/meals/uttupv1511815050.jpg"
             ),
             Item(
-                name = "Nanaimo Bars",
-                category = "Supper",
-                subcategory = "Desserts",
-                desc = "A Canadian no-bake dessert bar consisting of a crumbly base, a custard middle layer, and a chocolate topping.",
-                ingredients = "Butter, sugar, cocoa powder, eggs, custard powder, chocolate chips",
+                name = getString(R.string.nanaimobars_title),
+                category = getString(R.string.supper),
+                subcategory = getString(R.string.desserts),
+                desc = getString(R.string.nanaimobars_descr),
+                ingredients = getString(R.string.nanaimobars_ingr),
                 image = "https://www.themealdb.com/images/media/meals/vwuprt1511813703.jpg"
             ),
             Item(
-                name = "Pate Chinois",
-                category = "Dinner",
-                subcategory = "Main Dishes",
-                desc = "Pate Chinois is a Canadian casserole made with layers of ground beef, corn, and mashed potatoes.",
-                ingredients = "Ground beef, corn, mashed potatoes, onions, garlic, butter",
+                name = getString(R.string.patechinois_title),
+                category = getString(R.string.dinner),
+                subcategory = getString(R.string.dinner),
+                desc = getString(R.string.patechinois_descr),
+                ingredients = getString(R.string.patechinois_ingr),
                 image = "https://www.themealdb.com/images/media/meals/yyrrxr1511816289.jpg"
             ),
             Item(
-                name = "Pouding chomeur",
-                category = "Supper",
-                subcategory = "Desserts",
-                desc = "Pouding chomeur is a classic Quebecois dessert made with a moist cake topped with hot syrup.",
-                ingredients = "Flour, sugar, butter, maple syrup, vanilla, baking powder",
+                name = getString(R.string.poudingchomeur_title),
+                category = getString(R.string.supper),
+                subcategory = getString(R.string.desserts),
+                desc = getString(R.string.poudingchomeur_descr),
+                ingredients = getString(R.string.poudingchomeur_ingr),
                 image = "https://www.themealdb.com/images/media/meals/yqqqwu1511816912.jpg"
             ),
             Item(
-                name = "Poutine",
-                category = "Dinner",
-                subcategory = "Main Dishes",
-                desc = "A beloved Canadian dish made of fries topped with cheese curds and smothered in gravy.",
-                ingredients = "French fries, cheese curds, brown gravy",
+                name = getString(R.string.poutine_title),
+                category = getString(R.string.dinner),
+                subcategory = getString(R.string.main_dishes),
+                desc = getString(R.string.poutine_descr),
+                ingredients = getString(R.string.poutine_ingr),
                 image = "https://www.themealdb.com/images/media/meals/uuyrrx1487327597.jpg"
             ),
             Item(
-                name = "Rappie Pie",
-                category = "Dinner",
-                subcategory = "Main Dishes",
-                desc = "Rappie Pie is a traditional Acadian dish made with grated potatoes, meat, and a rich broth.",
-                ingredients = "Potatoes, chicken, pork, onions, butter, broth",
+                name = getString(R.string.rappiepie_title),
+                category = getString(R.string.dinner),
+                subcategory = getString(R.string.main_dishes),
+                desc = getString(R.string.rappiepie_descr),
+                ingredients = getString(R.string.rappiepie_ingr),
                 image = "https://www.yarmouthandacadianshores.com/content/uploads/2021/05/rappie-pie-1214x680.jpg"
             ),
             Item(
-                name = "Split Pea Soup",
-                category = "Main Dishes",
-                subcategory = "Soups",
-                desc = "A hearty and flavorful soup made with split peas, vegetables, and herbs.",
-                ingredients = "Split peas, carrots, onions, celery, garlic, bay leaves, thyme",
+                name = getString(R.string.splitpeasoup_title),
+                category = getString(R.string.dinner),
+                subcategory = getString(R.string.soups),
+                desc = getString(R.string.splitpeasoup_descr),
+                ingredients = getString(R.string.splitpeasoup_ingr),
                 image = "https://www.themealdb.com/images/media/meals/xxtsvx1511814083.jpg"
             ),
             Item(
-                name = "Sugar Pie",
-                category = "Lunch",
-                subcategory = "Desserts",
-                desc = "Sugar pie is a rich Canadian dessert made with a sweet, caramel-like filling.",
-                ingredients = "Butter, sugar, brown sugar, cream, flour, vanilla",
+                name = getString(R.string.sugarpie_title),
+                category = getString(R.string.lunch),
+                subcategory = getString(R.string.desserts),
+                desc = getString(R.string.sugarpie_descr),
+                ingredients = getString(R.string.sugarpie_ingr),
                 image = "https://www.themealdb.com/images/media/meals/yrstur1511816601.jpg"
             ),
             Item(
-                name = "Timbits",
-                category = "Lunch",
-                subcategory = "Desserts",
-                desc = "Timbits are small doughnut holes that are a Canadian favorite, often dipped in sugar or glazed.",
-                ingredients = "Flour, sugar, butter, eggs, yeast, milk, chocolate, glaze",
+                name = getString(R.string.timbits_title),
+                category = getString(R.string.lunch),
+                subcategory = getString(R.string.desserts),
+                desc = getString(R.string.timbits_descr),
+                ingredients = getString(R.string.timbits_ingr),
                 image = "https://www.themealdb.com/images/media/meals/txsupu1511815755.jpg"
             ),
             Item(
-                name = "Tourtiere",
-                category = "Dinner",
-                subcategory = "Main Dishes",
-                desc = "Tourtiere is a traditional Canadian meat pie made with ground pork, beef, and a mix of spices.",
-                ingredients = "Ground pork, ground beef, onions, garlic, pie crust, spices",
+                name = getString(R.string.tourtiere_title),
+                category = getString(R.string.dinner),
+                subcategory = getString(R.string.main_dishes),
+                desc = getString(R.string.tourtiere_descr),
+                ingredients = getString(R.string.tourtiere_ingr),
                 image = "https://www.themealdb.com/images/media/meals/ytpstt1511814614.jpg"
             ),
             Item(
-                name = "Eggs Benedict",
-                category = "Breakfast",
-                subcategory = "Main Dishes",
-                desc = "A classic breakfast dish with poached eggs, English muffins, Canadian bacon, and hollandaise sauce.",
-                ingredients = "Eggs, English muffins, Canadian bacon, hollandaise sauce",
+                name = getString(R.string.eggsbenedict_title),
+                category = getString(R.string.breakfast),
+                subcategory = getString(R.string.main_dishes),
+                desc = getString(R.string.eggsbenedict_descr),
+                ingredients = getString(R.string.eggsbenedict_ingr),
                 image = "https://www.allrecipes.com/thmb/CjrK2YaITW3sL1SdTtJIXDg-stc=/0x512/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/17205-eggs-benedict-DDMFS-4x3-a0042d5ae1da485fac3f468654187db0.jpg"
             ),
             Item(
-                name = "Caesar Salad",
-                category = "Lunch",
-                subcategory = "Salads",
-                desc = "A classic Caesar salad with crisp romaine lettuce, creamy dressing, crunchy croutons, and parmesan cheese.",
-                ingredients = "Romaine lettuce, Caesar dressing, croutons, parmesan cheese",
+                name = getString(R.string.caesarsalad_title),
+                category = getString(R.string.lunch),
+                subcategory = getString(R.string.salads),
+                desc = getString(R.string.caesarsalad_descr),
+                ingredients = getString(R.string.caesarsalad_ingr),
                 image = "https://www.themealdb.com//images//media//meals//k29viq1585565980.jpg"
             ),
             Item(
-                name = "Tiramisu",
-                category = "Supper",
-                subcategory = "Desserts",
-                desc = "A popular Italian dessert made of layers of coffee-soaked ladyfingers, mascarpone cheese, and cocoa powder.",
-                ingredients = "Ladyfingers, mascarpone cheese, coffee, cocoa powder, sugar, eggs",
+                name = getString(R.string.tiramisu_title),
+                category = getString(R.string.supper),
+                subcategory = getString(R.string.desserts),
+                desc = getString(R.string.tiramisu_descr),
+                ingredients = getString(R.string.tiramisu_ingr),
                 image = "https://www.flavoursholidays.co.uk/wp-content/uploads/2020/07/Tiramisu-1200x800.jpg.webp"
             ),
             Item(
-                name = "Guacamole",
-                category = "Lunch",
-                subcategory = "Appetizers",
-                desc = "A creamy avocado dip flavored with lime, garlic, and cilantro, perfect with tortilla chips or as a topping.",
-                ingredients = "Avocados, lime, garlic, cilantro, onions, salt",
+                name = getString(R.string.guacamole_title),
+                category = getString(R.string.lunch),
+                subcategory = getString(R.string.appetizers),
+                desc = getString(R.string.guacamole_descr),
+                ingredients = getString(R.string.guacamole_ingr),
                 image = "https://www.allrecipes.com/thmb/ogP_IyqGaA-s_aWHDn_-vVNoN-Y=/0x512/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/AR-14231-guacamole-4x3-f7a3b5752c7f4f3fb934d03a8b548826.jpg"
             ),
             Item(
-                name = "Vegetable Stir-Fry",
-                category = "Dinner",
-                subcategory = "Main Dishes",
-                desc = "A quick and healthy stir-fry with mixed vegetables and a savory soy sauce-based sauce.",
-                ingredients = "Broccoli, carrots, bell peppers, soy sauce, garlic, ginger, olive oil",
+                name = getString(R.string.vegetablestirfry_title),
+                category = getString(R.string.dinner),
+                subcategory = getString(R.string.main_dishes),
+                desc = getString(R.string.vegetablestirfry_descr),
+                ingredients = getString(R.string.vegetablestirfry_ingr),
                 image = "https://www.allrecipes.com/thmb/Ue0HV0xdlsuhJj74JsPjcyVIZWQ=/0x512/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/228823-quick-beef-stir-fry-DDMFS-4x3-1f79b031d3134f02ac27d79e967dfef5.jpg"
             ),
             Item(
-                name = "Churros",
-                category = "Supper",
-                subcategory = "Desserts",
-                desc = "Fried dough pastry dusted with cinnamon sugar, often served with chocolate or caramel sauce.",
-                ingredients = "Flour, sugar, cinnamon, butter, eggs, oil, chocolate sauce",
+                name = getString(R.string.churros_title),
+                category = getString(R.string.supper),
+                subcategory = getString(R.string.desserts),
+                desc = getString(R.string.churros_descr),
+                ingredients = getString(R.string.churros_ingr),
                 image = "https://www.allrecipes.com/thmb/XlI_LU3G49F7KI4AC5o6RecuPVM=/0x512/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/ALR-recipe-24700-churros-VAT-hero-03-4x3-a7f6af1860934b0385f84ab9f13f2613.jpg"
             ),
             Item(
-                name = "Lemonade",
-                category = "Lunch",
-                subcategory = "Drinks",
-                desc = "A refreshing drink made with fresh lemons, sugar, and water.",
-                ingredients = "Lemons, sugar, water, refreshing ice straight from the freezer",
+                name = getString(R.string.lemonade_title),
+                category = getString(R.string.lunch),
+                subcategory = getString(R.string.drinks),
+                desc = getString(R.string.lemonade_descr),
+                ingredients = getString(R.string.lemonade_ingr),
                 image = "https://www.allrecipes.com/thmb/Z5xioduNjcNryQgkyaPRpNqfXvQ=/0x512/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/32385-best-lemonade-ever-DDMFS-4x3-8cef7761205e417499c89eb178e5ba2b.jpg"
             )
         )
         for (recipe in recipes) {
             if (!dbHelper.isRecipeExist(recipe)) {
-                dbHelper.addFood(recipe, -2)
+                dbHelper.addFood(recipe, -2, lang)
             }
         }
     }
 
-    private fun getOrSetInitialRecipes(): ArrayList<Item> {
+    private fun getOrSetInitialRecipes(lang: String): ArrayList<Item> {
         val sharedPreferences = requireContext().getSharedPreferences("app_preferences", Context.MODE_PRIVATE)
 
-        val isFirstRun = sharedPreferences.getBoolean("is_first_run", true)
+        val savedRecipes = sharedPreferences.getStringSet("current_recipes", null)
+        val recipes = savedRecipes?.mapNotNull { recipeName ->
+            dbHelper.getFoodByNameAndLanguage(recipeName, lang)
+        } ?: emptyList()
 
-        return if (!isFirstRun) {
-            val savedRecipes = sharedPreferences.getStringSet("initial_recipes", null)
-            ArrayList(
-                savedRecipes?.mapNotNull { recipeName -> dbHelper.getFoodByName(recipeName) } ?: emptyList()
-            )
-        } else {
-            val allRecipes = dbHelper.getAllFoods()
-            val randomRecipes = allRecipes.shuffled().take(5)
-
-            sharedPreferences.edit()
-                .putStringSet("initial_recipes", randomRecipes.map { it.name }.toSet())
-                .putBoolean("is_first_run", false)
-                .apply()
-
-            ArrayList(randomRecipes)
+        if (recipes.isNotEmpty()) {
+            return ArrayList(recipes)
         }
+
+        val allRecipes = dbHelper.getAllFoodsByLanguage(lang)
+        val randomRecipes = allRecipes.shuffled().take(5)
+
+        sharedPreferences.edit()
+            .putStringSet("current_recipes", randomRecipes.map { it.name }.toSet())
+            .apply()
+
+        return ArrayList(randomRecipes)
     }
 }

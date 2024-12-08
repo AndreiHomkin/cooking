@@ -30,13 +30,13 @@ class AuthActivity : AppCompatActivity() {
             val pass = userPass.text.toString().trim()
 
             if(login == "" || pass == "")
-                Toast.makeText(this, "Not all fields are filled", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, getString(R.string.fill_all_fields), Toast.LENGTH_LONG).show()
             else{
                 val db = DbHelper(this, null)
                 val isAuth = db.getUser(login, pass)
 
                 if(isAuth){
-                    Toast.makeText(this, "User $login logged in", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this, getString(R.string.user_logged_in, login), Toast.LENGTH_LONG).show()
                     userLogin.text.clear()
                     userPass.text.clear()
 
@@ -55,7 +55,7 @@ class AuthActivity : AppCompatActivity() {
                     finish()
                 }
                 else{
-                    Toast.makeText(this, "Data is incorrect", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this, getString(R.string.data_is_incorrect), Toast.LENGTH_LONG).show()
                 }
             }
         }

@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Cook</string>
+    <string name="login_to_add_receipts">Войти чтобы добавить рецепты</string>
+    <string name="your_receipts">Ваши рецепты</string>
+    <string name="name">Назв.</string>
+    <string name="add_receipt">Добавить рецепт</string>
+    <string name="receipt_name">Назв. рецепта</string>
+    <string name="category">Категория</string>
+    <string name="ingredients">Ингредиенты</string>
+    <string name="steps_to_cook">Описание</string>
+    <string name="description">Описание</string>
+    <string name="image">Изобр.</string>
+    <string name="create_receipt">Создать рецепт</string>
+    <string name="subcategory">Доп. категория</string>
+    <string name="login_to_your_account">Войти в аккаунт</string>
+    <string name="enter_login">Введите логин</string>
+    <string name="enter_password">Введите пароль</string>
+    <string name="login">Войти в аккаунт</string>
+    <string name="register">Регистрация</string>
+    <string name="create_an_account">Создать аккаунт</string>
+    <string name="enter_email">Введите почту</string>
+    <string name="create">Создать</string>
+    <string name="ingredientsWithDblpoint">Ингредиенты:</string>
+    <string name="descriptionWithDblpoint">Описание:</string>
+    <string name="when_to_eat">Когда принимать:</string>
+    <string name="categoryWithDblpoint">Категория:</string>
+    <string name="you_don_t_have_here_anything_yet">У вас нет ничего здесь</string>
+    <string name="login_to_add_favourites">Войти чтобы добавить в любимые</string>
+    <string name="favourites">Любимые</string>
+    <string name="menu">Меню</string>
+    <string name="new_for_you">Новое для вас</string>
+    <string name="what_s_on_menu_today">Сегодня в меню</string>
+    <string name="categories">Категории</string>
+    <string name="logout_from_account">Выйти из аккаунта</string>
+    <string name="profile">Профиль</string>
+    <string name="exit_app_title">Выход из приложения</string>
+    <string name="exit_app_message">Вы уверены, что хотите выйти?</string>
+    <string name="yes">Да</string>
+    <string name="no">Нет</string>
+    <string name="error_title">Ошибка</string>
+    <string name="error_message">Нет подключения к интернету. Приложение не может работать без интернета.</string>
+    <string name="ok">ОК</string>
+    <string name="home_menu">Главная</string>
+    <string name="favourites_menu">Любимые</string>
+    <string name="add_menu">Добавить</string>
+    <string name="settings_menu">Поиск</string>
+    <string name="profile_menu">Профиль</string>
+    <string name="breakfast">Завтрак</string>
+    <string name="lunch">Перекус</string>
+    <string name="dinner">Обед</string>
+    <string name="supper">Ужин</string>
+    <string name="appetizers">Закуски</string>
+    <string name="salads">Салаты</string>
+    <string name="main_dishes">Основные блюда</string>
+    <string name="soups">Супы</string>
+    <string name="desserts">Десерты</string>
+    <string name="drinks">Напитки</string>
+    <!-- BeaverTails -->
+    <string name="beavertails_title">БиверТейлс</string>
+    <string name="beavertails_descr">БиверТейлс — это канадская жареная лепешка с различными начинками, такими как сахар, корица и шоколад.</string>
+    <string name="beavertails_ingr">Мука, вода, сахар, корица, шоколадный соус</string>
+
+    <!-- Breakfast Potatoes -->
+    <string name="breakfastpotatoes_title">Картофель для завтрака</string>
+    <string name="breakfastpotatoes_descr">Классический гарнир для завтрака — хрустящий запеченный картофель с луком и болгарским перцем.</string>
+    <string name="breakfastpotatoes_ingr">Картофель, лук, болгарский перец, оливковое масло, соль, перец</string>
+
+    <!-- Canadian Butter Tarts -->
+    <string name="canadianbuttertarts_title">Канадские тарталетки с маслом</string>
+    <string name="canadianbuttertarts_descr">Канадский десерт с богатой и карамельной начинкой.</string>
+    <string name="canadianbuttertarts_ingr">Масло, сахар, яйца, ваниль, кленовый сироп, изюм, орехи</string>
+
+    <!-- Montreal Smoked Meat -->
+    <string name="montrealsmokedmeat_title">Монреальское копченое мясо</string>
+    <string name="montrealsmokedmeat_descr">Кошерный деликатес, подаваемый на ржаном хлебе с горчицей.</string>
+    <string name="montrealsmokedmeat_ingr">Грудинка говяжья, кошерная соль, черный перец, чеснок, ржаной хлеб, горчица</string>
+
+    <!-- Nanaimo Bars -->
+    <string name="nanaimobars_title">Нанаимо Барс</string>
+    <string name="nanaimobars_descr">Канадский десерт без выпечки с основой из крошки, слоем крема и шоколадной глазурью.</string>
+    <string name="nanaimobars_ingr">Масло, сахар, какао-порошок, яйца, крем-порошок, шоколадные чипсы</string>
+
+    <!-- Pate Chinois -->
+    <string name="patechinois_title">Пате Шинуаз</string>
+    <string name="patechinois_descr">Канадская запеканка с говяжьим фаршем, кукурузой и картофельным пюре.</string>
+    <string name="patechinois_ingr">Говяжий фарш, кукуруза, картофельное пюре, лук, чеснок, масло</string>
+
+    <!-- Pouding Chomeur -->
+    <string name="poudingchomeur_title">Пудинг для бедных</string>
+    <string name="poudingchomeur_descr">Классический квебекский десерт с влажным кексом и горячим сиропом.</string>
+    <string name="poudingchomeur_ingr">Мука, сахар, масло, кленовый сироп, ваниль, разрыхлитель</string>
+
+    <!-- Poutine -->
+    <string name="poutine_title">Путин</string>
+    <string name="poutine_descr">Канадское блюдо из картофеля фри с сыром и соусом.</string>
+    <string name="poutine_ingr">Картофель фри, сыр, коричневый соус</string>
+
+    <!-- Rappie Pie -->
+    <string name="rappiepie_title">Раппи Пай</string>
+    <string name="rappiepie_descr">Традиционное акадийское блюдо из тертого картофеля, мяса и богатого бульона.</string>
+    <string name="rappiepie_ingr">Картофель, курица, свинина, лук, масло, бульон</string>
+
+    <!-- Split Pea Soup -->
+    <string name="splitpeasoup_title">Суп из гороха</string>
+    <string name="splitpeasoup_descr">Сытный и ароматный суп из гороха с овощами и специями.</string>
+    <string name="splitpeasoup_ingr">Горох, морковь, лук, сельдерей, чеснок, лавровый лист, тимьян</string>
+
+    <!-- Sugar Pie -->
+    <string name="sugarpie_title">Сахарный пирог</string>
+    <string name="sugarpie_descr">Богатый канадский десерт с начинкой из сладкой карамели.</string>
+    <string name="sugarpie_ingr">Масло, сахар, коричневый сахар, сливки, мука, ваниль</string>
+
+    <!-- Timbits -->
+    <string name="timbits_title">Тимбитс</string>
+    <string name="timbits_descr">Канадские мини-пончики, покрытые сахаром или глазурью.</string>
+    <string name="timbits_ingr">Мука, сахар, масло, яйца, дрожжи, молоко, шоколад, глазурь</string>
+
+    <!-- Tourtiere -->
+    <string name="tourtiere_title">Туртьер</string>
+    <string name="tourtiere_descr">Традиционный канадский мясной пирог с фаршем из свинины, говядины и специй.</string>
+    <string name="tourtiere_ingr">Свиной фарш, говяжий фарш, лук, чеснок, тесто для пирога, специи</string>
+
+    <!-- Eggs Benedict -->
+    <string name="eggsbenedict_title">Яйца Бенедикт</string>
+    <string name="eggsbenedict_descr">Классическое блюдо с яйцами-пашот, английскими маффинами, канадским беконом и соусом голландез.</string>
+    <string name="eggsbenedict_ingr">Яйца, английские маффины, канадский бекон, соус голландез</string>
+
+    <!-- Caesar Salad -->
+    <string name="caesarsalad_title">Салат Цезарь</string>
+    <string name="caesarsalad_descr">Классический салат Цезарь с хрустящим романо, кремовым соусом, крутонами и пармезаном.</string>
+    <string name="caesarsalad_ingr">Листья романо, соус Цезарь, крутоны, сыр пармезан</string>
+
+    <!-- Tiramisu -->
+    <string name="tiramisu_title">Тирамису</string>
+    <string name="tiramisu_descr">Популярный итальянский десерт из слоев савоярди, пропитанных кофе, и сыра маскарпоне с какао.</string>
+    <string name="tiramisu_ingr">Савоярди, сыр маскарпоне, кофе, какао-порошок, сахар, яйца</string>
+
+    <!-- Guacamole -->
+    <string name="guacamole_title">Гуакамоле</string>
+    <string name="guacamole_descr">Кремовый соус из авокадо с лаймом, чесноком и кинзой, идеально подходит для начос или как топпинг.</string>
+    <string name="guacamole_ingr">Авокадо, лайм, чеснок, кинза, лук, соль</string>
+
+    <!-- Vegetable Stir-Fry -->
+    <string name="vegetablestirfry_title">Овощное рагу</string>
+    <string name="vegetablestirfry_descr">Быстрое и полезное блюдо из овощей в соусе на основе соевого соуса.</string>
+    <string name="vegetablestirfry_ingr">Брокколи, морковь, болгарский перец, соевый соус, чеснок, имбирь, оливковое масло</string>
+
+    <!-- Churros -->
+    <string name="churros_title">Чуррос</string>
+    <string name="churros_descr">Жареное тесто, обсыпанное корицей и сахаром, часто подается с шоколадным или карамельным соусом.</string>
+    <string name="churros_ingr">Мука, сахар, корица, масло, яйца, масло для жарки, шоколадный соус</string>
+
+    <!-- Lemonade -->
+    <string name="lemonade_title">Лимонад</string>
+    <string name="lemonade_descr">Освежающий напиток из свежих лимонов, сахара и воды.</string>
+    <string name="lemonade_ingr">Лимоны, сахар, вода, освежающий лед прямо из морозилки</string>
+
+    <string name="you_are_not_logged_in_yet">Вы ещё не вошли</string>
+    <string name="receipt_already_exist">Рецепт уже существует</string>
+    <string name="receipt_created_successfully">Рецепт успешно создан</string>
+    <string name="select_image">Выберите изображение</string>
+    <string name="fill_all_fields">Заполните поля</string>
+    <string name="view">Просмотр</string>
+    <string name="delete">Удалить</string>
+    <string name="search_here">Искать здесь...</string>
+    <string name="you_logged_out_from_your_account">Вы вышли из аккаунта</string>
+    <string name="data_is_incorrect">Данные неверны</string>
+    <string name="user_logged_in">Пользователь %1$s выполнил вход</string>
+    <string name="user_already_exist">Пользователь %1$s уже существует</string>
+    <string name="email_is_already_used">Почта %1$s уже используется для другого аккаунта</string>
+    <string name="email_is_incorrect">Почта неверного образца</string>
+    <string name="too_simple_password">Слишком простой пароль</string>
+    <string name="user_got_added">Пользователь %1$s был добавлен, перейдите на авторизацию</string>
+</resources>

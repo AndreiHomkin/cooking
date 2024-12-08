@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 
 class DbHelper(val context: Context, factory: SQLiteDatabase.CursorFactory?):
-    SQLiteOpenHelper(context, "app", factory, 10) {
+    SQLiteOpenHelper(context, "everything", factory, 5) {
     override fun onCreate(db: SQLiteDatabase?) {
         val query = "CREATE TABLE users (" +
                 "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
@@ -23,6 +23,7 @@ class DbHelper(val context: Context, factory: SQLiteDatabase.CursorFactory?):
                 "ingredients TEXT, " +
                 "image TEXT, " +
                 "user_id INTEGER, " +
+                "language TEXT, " +
                 "FOREIGN KEY (user_id) REFERENCES users(id))"
         val queryFavourites = "CREATE TABLE favorites(" +
                 "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
@@ -42,7 +43,7 @@ class DbHelper(val context: Context, factory: SQLiteDatabase.CursorFactory?):
         onCreate(db)
     }
 
-    fun addFood(item: Item, userId: Int){
+    fun addFood(item: Item, userId: Int, lang: String){
         val values = ContentValues()
         values.put("name", item.name)
         values.put("category", item.category)
@@ -51,6 +52,7 @@ class DbHelper(val context: Context, factory: SQLiteDatabase.CursorFactory?):
         values.put("ingredients", item.ingredients)
         values.put("image", item.image)
         values.put("user_id", userId)
+        values.put("language", lang)
 
         val db = this.writableDatabase
         db.insert("food", null, values)
@@ -132,28 +134,6 @@ class DbHelper(val context: Context, factory: SQLiteDatabase.CursorFactory?):
         val db = this.writableDatabase
         db.delete("food", "name = ?", arrayOf(item.name)) // Delete food by id
         db.close()
-    }
-    fun getFoodsByUser(userId: Int): List<Item> {
-        val foodList = mutableListOf<Item>()
-        val db = this.readableDatabase
-        val cursor = db.rawQuery("SELECT * FROM food WHERE user_id = ?", arrayOf(userId.toString()))
-
-        if (cursor.moveToFirst()) {
-            do {
-                val name = cursor.getString(cursor.getColumnIndexOrThrow("name"))
-                val category = cursor.getString(cursor.getColumnIndexOrThrow("category"))
-                val subcategory = cursor.getString(cursor.getColumnIndexOrThrow("subcategory"))
-                val description = cursor.getString(cursor.getColumnIndexOrThrow("description"))
-                val ingredients = cursor.getString(cursor.getColumnIndexOrThrow("ingredients"))
-                val image = cursor.getString(cursor.getColumnIndexOrThrow("image"))
-
-                val foodItem = Item(name, category,subcategory, description, ingredients, image)
-                foodList.add(foodItem)
-            } while (cursor.moveToNext())
-        }
-
-        cursor.close()
-        return foodList
     }
     fun getFoodIdByName(name: String): Int {
         val db = this.readableDatabase
@@ -241,35 +221,6 @@ class DbHelper(val context: Context, factory: SQLiteDatabase.CursorFactory?):
         db.delete("favorites", "user_id = ? AND food_id = ?", arrayOf(userId.toString(), foodId.toString()))
         db.close()
     }
-    fun getFavoritesByUser(userId: Int): List<Item> {
-        val foodList = mutableListOf<Item>()
-        val db = this.readableDatabase
-        val cursor = db.rawQuery(
-            """
-        SELECT food.* FROM food 
-        INNER JOIN favorites ON food.id = favorites.food_id 
-        WHERE favorites.user_id = ?
-        """,
-            arrayOf(userId.toString())
-        )
-
-        if (cursor.moveToFirst()) {
-            do {
-                val name = cursor.getString(cursor.getColumnIndexOrThrow("name"))
-                val category = cursor.getString(cursor.getColumnIndexOrThrow("category"))
-                val subcategory = cursor.getString(cursor.getColumnIndexOrThrow("subcategory"))
-                val description = cursor.getString(cursor.getColumnIndexOrThrow("description"))
-                val ingredients = cursor.getString(cursor.getColumnIndexOrThrow("ingredients"))
-                val image = cursor.getString(cursor.getColumnIndexOrThrow("image"))
-
-                val foodItem = Item(name, category, subcategory, description, ingredients, image)
-                foodList.add(foodItem)
-            } while (cursor.moveToNext())
-        }
-
-        cursor.close()
-        return foodList
-    }
     fun isFavorite(userId: Int, foodId: Int): Boolean {
         val db = this.readableDatabase
         val cursor = db.rawQuery(
@@ -290,5 +241,99 @@ class DbHelper(val context: Context, factory: SQLiteDatabase.CursorFactory?):
         cursor.close()
 
         return exists
+    }
+    fun getFoodByNameAndLanguage(name: String, lang: String): Item? {
+        val db = this.readableDatabase
+        val cursor = db.rawQuery("SELECT * FROM food WHERE name = ? AND language = ?", arrayOf(name, lang))
+
+        var foodItem: Item? = null
+
+        if (cursor.moveToFirst()) {
+            val category = cursor.getString(cursor.getColumnIndexOrThrow("category"))
+            val subcategory = cursor.getString(cursor.getColumnIndexOrThrow("subcategory"))
+            val description = cursor.getString(cursor.getColumnIndexOrThrow("description"))
+            val ingredients = cursor.getString(cursor.getColumnIndexOrThrow("ingredients"))
+            val image = cursor.getString(cursor.getColumnIndexOrThrow("image"))
+
+            foodItem = Item(name, category, subcategory, description, ingredients, image)
+        }
+
+        cursor.close()
+        return foodItem
+    }
+    fun getAllFoodsByLanguage(lang: String): List<Item> {
+        val foodList = mutableListOf<Item>()
+
+        val db = this.readableDatabase
+        val cursor = db.rawQuery("SELECT * FROM food WHERE language = ?", arrayOf(lang))
+
+        if (cursor.moveToFirst()) {
+            do {
+                val name = cursor.getString(cursor.getColumnIndexOrThrow("name"))
+                val category = cursor.getString(cursor.getColumnIndexOrThrow("category"))
+                val subcategory = cursor.getString(cursor.getColumnIndexOrThrow("subcategory"))
+                val description = cursor.getString(cursor.getColumnIndexOrThrow("description"))
+                val ingredients = cursor.getString(cursor.getColumnIndexOrThrow("ingredients"))
+
+                val image = cursor.getString(cursor.getColumnIndexOrThrow("image"))
+
+                val foodItem = Item(name, category,subcategory, description, ingredients, image)
+                foodList.add(foodItem)
+            } while (cursor.moveToNext())
+        }
+
+        cursor.close()
+        return foodList
+    }
+    fun getFoodsByUserAndLanguage(userId: Int, lang: String): List<Item> {
+        val foodList = mutableListOf<Item>()
+        val db = this.readableDatabase
+        val cursor = db.rawQuery("SELECT * FROM food WHERE user_id = ? AND language = ?", arrayOf(userId.toString(), lang))
+
+        if (cursor.moveToFirst()) {
+            do {
+                val name = cursor.getString(cursor.getColumnIndexOrThrow("name"))
+                val category = cursor.getString(cursor.getColumnIndexOrThrow("category"))
+                val subcategory = cursor.getString(cursor.getColumnIndexOrThrow("subcategory"))
+                val description = cursor.getString(cursor.getColumnIndexOrThrow("description"))
+                val ingredients = cursor.getString(cursor.getColumnIndexOrThrow("ingredients"))
+                val image = cursor.getString(cursor.getColumnIndexOrThrow("image"))
+
+                val foodItem = Item(name, category,subcategory, description, ingredients, image)
+                foodList.add(foodItem)
+            } while (cursor.moveToNext())
+        }
+
+        cursor.close()
+        return foodList
+    }
+    fun getFavoritesByUserAndLanguage(userId: Int, lang: String): List<Item> {
+        val foodList = mutableListOf<Item>()
+        val db = this.readableDatabase
+        val cursor = db.rawQuery(
+            """
+        SELECT food.* FROM food 
+        INNER JOIN favorites ON food.id = favorites.food_id 
+        WHERE favorites.user_id = ? AND food.language = ?
+        """,
+            arrayOf(userId.toString(), lang)
+        )
+
+        if (cursor.moveToFirst()) {
+            do {
+                val name = cursor.getString(cursor.getColumnIndexOrThrow("name"))
+                val category = cursor.getString(cursor.getColumnIndexOrThrow("category"))
+                val subcategory = cursor.getString(cursor.getColumnIndexOrThrow("subcategory"))
+                val description = cursor.getString(cursor.getColumnIndexOrThrow("description"))
+                val ingredients = cursor.getString(cursor.getColumnIndexOrThrow("ingredients"))
+                val image = cursor.getString(cursor.getColumnIndexOrThrow("image"))
+
+                val foodItem = Item(name, category, subcategory, description, ingredients, image)
+                foodList.add(foodItem)
+            } while (cursor.moveToNext())
+        }
+
+        cursor.close()
+        return foodList
     }
 }

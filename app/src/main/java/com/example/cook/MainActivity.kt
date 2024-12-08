@@ -3,6 +3,7 @@ package com.example.cook
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.DialogInterface
+import android.content.res.Configuration
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
@@ -12,17 +13,27 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import java.util.Locale
 
 class MainActivity : AppCompatActivity() {
     private lateinit var bottom_navigation: BottomNavigationView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        val sharedPreferences = getSharedPreferences("language", Context.MODE_PRIVATE)
+        val language = sharedPreferences.getString("selected_language", "en")
+        val locale = Locale(language!!)
+        Locale.setDefault(locale)
+        val config = resources.configuration
+        config.setLocale(locale)
+        resources.updateConfiguration(config, resources.displayMetrics)
+
         if (!isNetworkAvailable()) {
             AlertDialog.Builder(this).apply {
-                setTitle("Error")
-                setMessage("There is no internet connection. The application cannot be used without an internet connection.")
-                setPositiveButton("OK") { dialog: DialogInterface, _: Int ->
+                setTitle(getString(R.string.error_title))
+                setMessage(getString(R.string.error_message))
+                setPositiveButton(getString(R.string.yes)) { dialog: DialogInterface, _: Int ->
                     dialog.dismiss()
                     finish()
                 }
@@ -76,24 +87,35 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+
+    override fun attachBaseContext(newBase: Context?) {
+        val sharedPreferences = newBase?.getSharedPreferences("language", Context.MODE_PRIVATE)
+        val language = sharedPreferences?.getString("selected_language", "en") ?: "en"
+
+        val locale = Locale(language)
+        Locale.setDefault(locale)
+        val config = Configuration(newBase?.resources?.configuration).apply {
+            setLocale(locale)
+        }
+        super.attachBaseContext(newBase?.createConfigurationContext(config))
+    }
     @Deprecated("Deprecated in Java")
     @SuppressLint("MissingSuperCall")
     override fun onBackPressed() {
         AlertDialog.Builder(this).apply {
-            setTitle("Exit from the app")
-            setMessage("Are you sure you want to quit?")
-            setPositiveButton("Yes") { dialog: DialogInterface, _: Int ->
+            setTitle(R.string.exit_app_title)
+            setMessage(R.string.exit_app_message)
+            setPositiveButton(R.string.yes) { dialog: DialogInterface, _: Int ->
                 dialog.dismiss()
                 finish()
             }
-            setNegativeButton("No") { dialog: DialogInterface, _: Int ->
+            setNegativeButton(R.string.no) { dialog: DialogInterface, _: Int ->
                 dialog.dismiss()
             }
             create()
             show()
         }
     }
-
     override fun onStop() {
         super.onStop()
         val sharedPreferences = getSharedPreferences("app_preferences", Context.MODE_PRIVATE)
@@ -123,5 +145,16 @@ class MainActivity : AppCompatActivity() {
                 .replace(R.id.frame_layout, fragment)
                 .commit()
         }
+    }
+    fun updateLocale(language: String) {
+        val locale = Locale(language)
+        Locale.setDefault(locale)
+
+        val config = Configuration(resources.configuration)
+        config.setLocale(locale)
+
+        baseContext.resources.updateConfiguration(config, baseContext.resources.displayMetrics)
+
+        recreate() // Перезапуск активности для применения изменений
     }
 }

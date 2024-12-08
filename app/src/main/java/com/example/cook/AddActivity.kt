@@ -5,6 +5,7 @@ package com.example.cook
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.content.res.Configuration
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
@@ -22,11 +23,12 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
+import java.util.Locale
 
 
 class AddActivity : AppCompatActivity() {
-    private val categories: Array<String> = arrayOf("Breakfast", "Lunch", "Dinner", "Supper")
-    private val subcategories: Array<String> = arrayOf("Appetizers", "Salads", "Main Dishes", "Soups", "Desserts", "Drinks")
+    private lateinit var categories: Array<String>
+    private lateinit var subcategories: Array<String>
     private val REQUEST_CODE = 1
     private var item: Item? = null
     private var selectedCategory: String? = null
@@ -38,6 +40,21 @@ class AddActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add)
+
+        categories = arrayOf(
+            getString(R.string.breakfast),
+            getString(R.string.lunch),
+            getString(R.string.dinner),
+            getString(R.string.supper)
+        )
+        subcategories = arrayOf(
+            getString(R.string.appetizers),
+            getString(R.string.salads),
+            getString(R.string.main_dishes),
+            getString(R.string.soups),
+            getString(R.string.desserts),
+            getString(R.string.drinks)
+        )
 
         val settingsPreferences = getSharedPreferences("Settings", Context.MODE_PRIVATE)
         val isDarkMode = settingsPreferences.getBoolean("isDarkMode", false)
@@ -123,7 +140,7 @@ class AddActivity : AppCompatActivity() {
             descReceipt = findViewById(R.id.receiptDesc)
 
             if(nameReceipt.text.isNullOrEmpty() || ingReceipt.text.isNullOrEmpty() || descReceipt.text.isNullOrEmpty()){
-                Toast.makeText(this, "Заполните поля", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, getString(R.string.fill_all_fields), Toast.LENGTH_LONG).show()
             }
             else{
                 val sharedPreferences =
@@ -177,7 +194,7 @@ class AddActivity : AppCompatActivity() {
                     editor.putString("backgroundUri", uri.toString())
                     editor.apply()
                 } else {
-                    Toast.makeText(this, "Выберите изображение", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this, getString(R.string.select_image), Toast.LENGTH_LONG).show()
                 }
             }
         }
@@ -192,17 +209,21 @@ class AddActivity : AppCompatActivity() {
 
         val sharedPreferencesUser = getSharedPreferences("UserPrefs", Context.MODE_PRIVATE)
         val userName = sharedPreferencesUser.getString("userName", "Unknown")
+
+        val sharedPreferencesLang = getSharedPreferences("language", Context.MODE_PRIVATE)
+        val language = sharedPreferencesLang.getString("selected_language", "en")
+
         val userId = dbHelper.getUserId(userName!!)
 
         item = Item(name, selectedCategory!!, selectedSubCategory!!, description, ingredients, imageUri)
 
         if(dbHelper.isRecipeExist(item!!)){
-            Toast.makeText(this, "Receipt already exist", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, getString(R.string.receipt_already_exist), Toast.LENGTH_LONG).show()
             return
         }
         else{
-            dbHelper.addFood(item!!, userId)
-            Toast.makeText(this, "Receipt created successfully", Toast.LENGTH_LONG).show()
+            dbHelper.addFood(item!!, userId, language!!)
+            Toast.makeText(this, getString(R.string.receipt_created_successfully), Toast.LENGTH_LONG).show()
             clearFields()
         }
     }
@@ -215,6 +236,17 @@ class AddActivity : AppCompatActivity() {
         nameReceipt.text.clear()
         ingReceipt.text.clear()
         descReceipt.text.clear()
+    }
+    override fun attachBaseContext(newBase: Context?) {
+        val sharedPreferences = newBase?.getSharedPreferences("language", Context.MODE_PRIVATE)
+        val language = sharedPreferences?.getString("selected_language", "en") ?: "en"
+
+        val locale = Locale(language)
+        Locale.setDefault(locale)
+        val config = Configuration(newBase?.resources?.configuration).apply {
+            setLocale(locale)
+        }
+        super.attachBaseContext(newBase?.createConfigurationContext(config))
     }
 
 }

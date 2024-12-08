@@ -2,6 +2,7 @@ package com.example.cook
 
 import android.content.Context
 import android.content.Intent
+import android.content.res.Configuration
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
@@ -13,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import java.util.Locale
 
 
 class ViewItemActivity : AppCompatActivity() {
@@ -25,7 +27,6 @@ class ViewItemActivity : AppCompatActivity() {
 
         val settingsPreferences = getSharedPreferences("Settings", Context.MODE_PRIVATE)
         val isDarkMode = settingsPreferences.getBoolean("isDarkMode", false)
-
 
         if (itemName != null) {
             dbHelper = DbHelper(this, null)
@@ -113,5 +114,16 @@ class ViewItemActivity : AppCompatActivity() {
         } else {
             button.setImageResource(R.drawable.baseline_favorite_border_24)
         }
+    }
+    override fun attachBaseContext(newBase: Context?) {
+        val sharedPreferences = newBase?.getSharedPreferences("language", Context.MODE_PRIVATE)
+        val language = sharedPreferences?.getString("selected_language", "en") ?: "en"
+
+        val locale = Locale(language)
+        Locale.setDefault(locale)
+        val config = Configuration(newBase?.resources?.configuration).apply {
+            setLocale(locale)
+        }
+        super.attachBaseContext(newBase?.createConfigurationContext(config))
     }
 }

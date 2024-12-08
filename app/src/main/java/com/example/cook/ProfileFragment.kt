@@ -3,6 +3,7 @@ package com.example.cook
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
+import android.content.res.Configuration
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -14,7 +15,8 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.content.ContextCompat
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import java.util.Locale
 
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
@@ -42,6 +44,7 @@ class ProfileFragment : Fragment() {
         val btnAuth = view.findViewById<Button>(R.id.btnLogin)
         val btnExit = view.findViewById<Button>(R.id.btnExit)
         val btnChangeTheme = view.findViewById<ImageView>(R.id.changeTheme)
+        val btnChangeLanguage = view.findViewById<ImageView>(R.id.changeLanguage)
         val profileName = view.findViewById<TextView>(R.id.account_name)
         val profileBack = view.findViewById<ConstraintLayout>(R.id.profileBack)
 
@@ -49,6 +52,9 @@ class ProfileFragment : Fragment() {
 
         val settingsPreferences = requireContext().getSharedPreferences("Settings", Context.MODE_PRIVATE)
         var isDarkMode = settingsPreferences.getBoolean("isDarkMode", false)
+
+        val sharedPreferencesLang = requireContext().getSharedPreferences("language", Context.MODE_PRIVATE)
+        var language = sharedPreferencesLang.getString("selected_language", "ru")
 
         applyTextColor(requireContext(), textProfile, isDarkMode)
         applyTextColor(requireContext(), profileName, isDarkMode)
@@ -64,7 +70,6 @@ class ProfileFragment : Fragment() {
         btnChangeTheme.setImageResource(
             if (isDarkMode) R.drawable.baseline_dark_mode_24 else R.drawable.baseline_sunny_24
         )
-
         btnReg.setOnClickListener {
             val intent = Intent(requireContext(), RegisterActivity::class.java)
             startActivity(intent)
@@ -79,8 +84,9 @@ class ProfileFragment : Fragment() {
             editor.clear()
             editor.apply()
 
-            profileName.text = "You are not logged in yet"
-            Toast.makeText(context, "You logged out from your account", Toast.LENGTH_SHORT).show()
+            profileName.text = getString(R.string.you_are_not_logged_in_yet)
+            Toast.makeText(context,
+                getString(R.string.you_logged_out_from_your_account), Toast.LENGTH_SHORT).show()
             btnExit.visibility = View.GONE
             btnAuth.visibility = View.VISIBLE
             btnReg.visibility = View.VISIBLE
@@ -109,10 +115,45 @@ class ProfileFragment : Fragment() {
                 if (isDarkMode) R.drawable.baseline_dark_mode_24 else R.drawable.baseline_sunny_24
             )
         }
+        btnChangeLanguage.setImageResource(
+            if (language == "ru") R.drawable.russia else R.drawable.us
+        )
+
+        btnChangeLanguage.setOnClickListener {
+            val editor = sharedPreferencesLang.edit()
+
+            language = if (language == "ru") "en" else "ru"
+            editor.putString("selected_language", language)
+            editor.apply()
+
+            btnChangeLanguage.setImageResource(
+                if (language == "ru") R.drawable.russia else R.drawable.us
+            )
+            val locale = Locale(language!!)
+            Locale.setDefault(locale)
+            val config = resources.configuration
+            config.setLocale(locale)
+            resources.updateConfiguration(config, resources.displayMetrics)
+
+            textProfile.text = getString(R.string.profile)
+            btnReg.text = getString(R.string.create_an_account)
+            btnAuth.text = getString(R.string.login_to_your_account)
+            btnExit.text = getString(R.string.logout_from_account)
+
+            val bottomNavigationView = requireActivity().findViewById<BottomNavigationView>(R.id.bottomNavigationView)
+            val menu = bottomNavigationView.menu
+
+            menu.findItem(R.id.home).title = getString(R.string.home_menu)
+            menu.findItem(R.id.add).title = getString(R.string.add_menu)
+            menu.findItem(R.id.favourites).title = getString(R.string.favourites_menu)
+            menu.findItem(R.id.profile).title = getString(R.string.profile_menu)
+            menu.findItem(R.id.search).title = getString(R.string.settings_menu)
+        }
 
         val sharedPreferences = requireContext().getSharedPreferences("UserPrefs", Context.MODE_PRIVATE)
-        val userName = sharedPreferences.getString("userName", "You are not logged in yet")
-        if(userName == "You are not logged in yet"){
+        val userName = sharedPreferences.getString("userName", getString(R.string.you_are_not_logged_in_yet))
+
+        if(userName == getString(R.string.you_are_not_logged_in_yet)){
             btnExit.visibility = View.GONE
             btnAuth.visibility = View.VISIBLE
             btnReg.visibility = View.VISIBLE

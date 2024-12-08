@@ -26,7 +26,7 @@
             android:layout_height="wrap_content"
             app:iconifiedByDefault="false"
             app:queryBackground="@android:color/transparent"
-            app:queryHint="Search here..."
+            app:queryHint="@string/search_here"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/materialCardView" />

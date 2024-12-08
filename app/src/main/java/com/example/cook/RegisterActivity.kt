@@ -25,27 +25,30 @@ class RegisterActivity : AppCompatActivity() {
             val email = userEmail.text.toString().trim()
 
             if(login == "" || email == "" || pass == "")
-                Toast.makeText(this, "Not all fields are filled", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, getString(R.string.fill_all_fields), Toast.LENGTH_LONG).show()
             else{
 
                 val db = DbHelper(this, null)
                 val isContains = email.lowercase().contains("@gmail.com".lowercase())
                 if(db.isUserExist(login)){
-                    Toast.makeText(this, "User $login already exist", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this,
+                        getString(R.string.user_already_exist, login), Toast.LENGTH_LONG).show()
                 }
                 else if(db.isEmailExist(email)){
-                    Toast.makeText(this, "Email $email is already used", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this,
+                        getString(R.string.email_is_already_used, email), Toast.LENGTH_LONG).show()
                 }
                 else if(!isContains){
-                    Toast.makeText(this, "Email is incorrect", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this, getString(R.string.email_is_incorrect), Toast.LENGTH_LONG).show()
                 }
                 else if(pass.length < 5){
-                    Toast.makeText(this, "Too simple password", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this, getString(R.string.too_simple_password), Toast.LENGTH_LONG).show()
                 }
                 else{
                     val user = User(login, email, pass)
                     db.addUser(user)
-                    Toast.makeText(this, "User $login got added", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this,
+                        getString(R.string.user_got_added, login), Toast.LENGTH_LONG).show()
 
                     userLogin.text.clear()
                     userEmail.text.clear()

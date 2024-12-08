@@ -57,7 +57,6 @@ class CategoriesActivity: AppCompatActivity() {
         itemsArrayList = ArrayList()
 
         loadFoodByCategory(categoryName, subCategoryName)
-
     }
     private fun loadFoodByCategory(category: String?, subCategory: String?) {
         val settingsPreferences = getSharedPreferences("Settings", Context.MODE_PRIVATE)

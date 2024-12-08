@@ -51,7 +51,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/gilroy_extrabold"
         android:textColor="@color/white"
-        android:text="View"
+        android:text="@string/view"
         android:backgroundTint="#8E0303"/>
 
     <Button
@@ -61,7 +61,7 @@
         android:layout_gravity="center"
         android:backgroundTint="#8E0303"
         android:fontFamily="@font/gilroy_extrabold"
-        android:text="Delete"
+        android:text="@string/delete"
         android:textColor="@color/white" />
 
 </LinearLayout>

@@ -44,6 +44,9 @@ class FavouritesFragment : Fragment() {
         val settingsPreferences = requireContext().getSharedPreferences("Settings", Context.MODE_PRIVATE)
         val isDarkMode = settingsPreferences.getBoolean("isDarkMode", false)
 
+        val sharedPreferencesLang = requireContext().getSharedPreferences("language", Context.MODE_PRIVATE)
+        val language = sharedPreferencesLang.getString("selected_language", "en")
+
         dbHelper = DbHelper(requireContext(), null)
 
         val warningText = view.findViewById<TextView>(R.id.warningFav)
@@ -52,7 +55,7 @@ class FavouritesFragment : Fragment() {
         val sharedPreferencesUser = requireContext().getSharedPreferences("UserPrefs", Context.MODE_PRIVATE)
         val userName = sharedPreferencesUser.getString("userName", "Unknown")
         val userId = dbHelper.getUserId(userName!!)
-        itemsArrayList = ArrayList(dbHelper.getFavoritesByUser(userId))
+        itemsArrayList = ArrayList(dbHelper.getFavoritesByUserAndLanguage(userId, language!!))
         if(userName == "Unknown"){
             warningText.visibility = View.VISIBLE
         }
@@ -114,8 +117,12 @@ class FavouritesFragment : Fragment() {
 
         val sharedPreferencesUser = requireContext().getSharedPreferences("UserPrefs", Context.MODE_PRIVATE)
         val userName = sharedPreferencesUser.getString("userName", "Unknown")
+
+        val sharedPreferencesLang = requireContext().getSharedPreferences("language", Context.MODE_PRIVATE)
+        val language = sharedPreferencesLang.getString("selected_language", "en")
+
         val userId = dbHelper.getUserId(userName!!)
-        val updatedFavorites = dbHelper.getFavoritesByUser(userId)
+        val updatedFavorites = dbHelper.getFavoritesByUserAndLanguage(userId, language!!)
 
         itemsArrayList.clear()
         itemsArrayList.addAll(updatedFavorites)

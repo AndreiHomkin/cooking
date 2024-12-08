@@ -38,11 +38,14 @@ class SearchFragment : Fragment() {
         val settingsPreferences = requireContext().getSharedPreferences("Settings", Context.MODE_PRIVATE)
         val isDarkMode = settingsPreferences.getBoolean("isDarkMode", false)
 
+        val sharedPreferencesLang = requireContext().getSharedPreferences("language", Context.MODE_PRIVATE)
+        val language = sharedPreferencesLang.getString("selected_language", "en")
+
         recycler = view.findViewById(R.id.recyclerView)
         searchView = view.findViewById(R.id.searchView)
 
         dbHelper = DbHelper(requireContext(), null)
-        itemsArrayList = ArrayList(dbHelper.getAllFoods())
+        itemsArrayList = ArrayList(dbHelper.getAllFoodsByLanguage(language.toString()))
         filteredList = ArrayList(itemsArrayList)
 
         val layoutManager = GridLayoutManager(context, 2)
