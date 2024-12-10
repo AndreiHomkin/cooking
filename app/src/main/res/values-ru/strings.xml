@@ -172,4 +172,7 @@
     <string name="email_is_incorrect">Почта неверного образца</string>
     <string name="too_simple_password">Слишком простой пароль</string>
     <string name="user_got_added">Пользователь %1$s был добавлен, перейдите на авторизацию</string>
+    <string name="privacy">Приватность</string>
+    <string name="private123">частный</string>
+    <string name="public123">публичный</string>
 </resources>

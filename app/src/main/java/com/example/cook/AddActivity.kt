@@ -29,10 +29,12 @@ import java.util.Locale
 class AddActivity : AppCompatActivity() {
     private lateinit var categories: Array<String>
     private lateinit var subcategories: Array<String>
+    private lateinit var privacy: Array<String>
     private val REQUEST_CODE = 1
     private var item: Item? = null
     private var selectedCategory: String? = null
     private var selectedSubCategory: String? = null
+    private var selectedPrivacy: String? = null
     private lateinit var addImage: ImageView
     private lateinit var nameReceipt: EditText
     private lateinit var ingReceipt: EditText
@@ -55,6 +57,15 @@ class AddActivity : AppCompatActivity() {
             getString(R.string.desserts),
             getString(R.string.drinks)
         )
+        privacy = arrayOf(
+            getString(R.string.private123),
+            getString(R.string.public123)
+        )
+
+        val privacyMap = mapOf(
+            getString(R.string.private123) to "private",
+            getString(R.string.public123) to "public"
+        )
 
         val settingsPreferences = getSharedPreferences("Settings", Context.MODE_PRIVATE)
         val isDarkMode = settingsPreferences.getBoolean("isDarkMode", false)
@@ -67,6 +78,7 @@ class AddActivity : AppCompatActivity() {
         val receiptIngrText = findViewById<TextView>(R.id.receiptIngrText)
         val receiptStepsText = findViewById<TextView>(R.id.textView6)
         val receiptImageText = findViewById<TextView>(R.id.textView5)
+        val receiptPrivacyText = findViewById<TextView>(R.id.privacy)
         val receiptName = findViewById<EditText>(R.id.receiptName)
         val receiptIngr = findViewById<EditText>(R.id.receiptIngr)
         val receiptDecr = findViewById<EditText>(R.id.receiptDesc)
@@ -85,6 +97,7 @@ class AddActivity : AppCompatActivity() {
         applyTextColor(this,receiptIngrText, isDarkMode)
         applyTextColor(this,receiptStepsText, isDarkMode)
         applyTextColor(this,receiptImageText, isDarkMode)
+        applyTextColor(this, receiptPrivacyText, isDarkMode)
 
         val btnExit = findViewById<ImageView>(R.id.backBtn)
         btnExit.setImageResource(
@@ -96,15 +109,20 @@ class AddActivity : AppCompatActivity() {
 
         val spinner = findViewById<Spinner>(R.id.spinner)
         val spinnerSub = findViewById<Spinner>(R.id.spinnerSub)
+        val spinnerPrivacy = findViewById<Spinner>(R.id.spinnerPrivacy)
         addImage = findViewById(R.id.receiptImg)
         val adapter: ArrayAdapter<String> =
             ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, categories)
         val adapterSub: ArrayAdapter<String> =
             ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, subcategories)
+        val adapterPrivacy: ArrayAdapter<String> =
+            ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, privacy)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         adapterSub.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        adapterPrivacy.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinner.adapter = adapter
         spinnerSub.adapter = adapterSub
+        spinnerPrivacy.adapter = adapterPrivacy
 
         requestPermission(android.Manifest.permission.READ_EXTERNAL_STORAGE, REQUEST_CODE)
 
@@ -131,6 +149,17 @@ class AddActivity : AppCompatActivity() {
             override fun onNothingSelected(p0: AdapterView<*>?) {
                 TODO("Not yet implemented")
             }
+        }
+        spinnerPrivacy.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+                val selectedText = p0?.getItemAtPosition(p2).toString()
+                selectedPrivacy = privacyMap[selectedText]
+            }
+
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+                TODO("Not yet implemented")
+            }
+
         }
 
         val buttonCreate: Button = findViewById(R.id.createItem)
@@ -211,7 +240,7 @@ class AddActivity : AppCompatActivity() {
         val userName = sharedPreferencesUser.getString("userName", "Unknown")
 
         val sharedPreferencesLang = getSharedPreferences("language", Context.MODE_PRIVATE)
-        val language = sharedPreferencesLang.getString("selected_language", "en")
+        val language = sharedPreferencesLang.getString("selected_language", "ru")
 
         val userId = dbHelper.getUserId(userName!!)
 
@@ -222,7 +251,7 @@ class AddActivity : AppCompatActivity() {
             return
         }
         else{
-            dbHelper.addFood(item!!, userId, language!!)
+            dbHelper.addFood(item!!, userId, language!!, visibility = selectedPrivacy.toString())
             Toast.makeText(this, getString(R.string.receipt_created_successfully), Toast.LENGTH_LONG).show()
             clearFields()
         }
@@ -239,7 +268,7 @@ class AddActivity : AppCompatActivity() {
     }
     override fun attachBaseContext(newBase: Context?) {
         val sharedPreferences = newBase?.getSharedPreferences("language", Context.MODE_PRIVATE)
-        val language = sharedPreferences?.getString("selected_language", "en") ?: "en"
+        val language = sharedPreferences?.getString("selected_language", "ru") ?: "ru"
 
         val locale = Locale(language)
         Locale.setDefault(locale)

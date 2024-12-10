@@ -24,6 +24,7 @@ class DbHelper(val context: Context, factory: SQLiteDatabase.CursorFactory?):
                 "image TEXT, " +
                 "user_id INTEGER, " +
                 "language TEXT, " +
+                "visibility TEXT DEFAULT 'public', " +
                 "FOREIGN KEY (user_id) REFERENCES users(id))"
         val queryFavourites = "CREATE TABLE favorites(" +
                 "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
@@ -43,7 +44,7 @@ class DbHelper(val context: Context, factory: SQLiteDatabase.CursorFactory?):
         onCreate(db)
     }
 
-    fun addFood(item: Item, userId: Int, lang: String){
+    fun addFood(item: Item, userId: Int, lang: String, visibility: String = "public"){
         val values = ContentValues()
         values.put("name", item.name)
         values.put("category", item.category)
@@ -53,6 +54,7 @@ class DbHelper(val context: Context, factory: SQLiteDatabase.CursorFactory?):
         values.put("image", item.image)
         values.put("user_id", userId)
         values.put("language", lang)
+        values.put("visibility", visibility)
 
         val db = this.writableDatabase
         db.insert("food", null, values)
@@ -101,7 +103,7 @@ class DbHelper(val context: Context, factory: SQLiteDatabase.CursorFactory?):
         val foodList = mutableListOf<Item>()
 
         val db = this.readableDatabase
-        val cursor = db.rawQuery("SELECT * FROM food", null)
+        val cursor = db.rawQuery("SELECT * FROM food WHERE visibility = 'public'", null)
 
         if (cursor.moveToFirst()) {
             do {
@@ -149,7 +151,7 @@ class DbHelper(val context: Context, factory: SQLiteDatabase.CursorFactory?):
     fun getFoodsByCategory(category: String): List<Item> {
         val foodList = mutableListOf<Item>()
         val db = this.readableDatabase
-        val cursor = db.rawQuery("SELECT * FROM food WHERE category = ?", arrayOf(category))
+        val cursor = db.rawQuery("SELECT * FROM food WHERE category = ? AND visibility = 'public'", arrayOf(category))
 
         if (cursor.moveToFirst()) {
             do {
@@ -170,7 +172,7 @@ class DbHelper(val context: Context, factory: SQLiteDatabase.CursorFactory?):
     fun getFoodsBySubCategory(subcategory: String): List<Item> {
         val foodList = mutableListOf<Item>()
         val db = this.readableDatabase
-        val cursor = db.rawQuery("SELECT * FROM food WHERE subcategory = ?", arrayOf(subcategory))
+        val cursor = db.rawQuery("SELECT * FROM food WHERE subcategory = ? AND visibility = 'public'", arrayOf(subcategory))
 
         if (cursor.moveToFirst()) {
             do {
@@ -265,7 +267,7 @@ class DbHelper(val context: Context, factory: SQLiteDatabase.CursorFactory?):
         val foodList = mutableListOf<Item>()
 
         val db = this.readableDatabase
-        val cursor = db.rawQuery("SELECT * FROM food WHERE language = ?", arrayOf(lang))
+        val cursor = db.rawQuery("SELECT * FROM food WHERE language = ? AND visibility = 'public'", arrayOf(lang))
 
         if (cursor.moveToFirst()) {
             do {

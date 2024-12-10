@@ -66,7 +66,7 @@ class AuthActivity : AppCompatActivity() {
     }
     override fun attachBaseContext(newBase: Context?) {
         val sharedPreferences = newBase?.getSharedPreferences("language", Context.MODE_PRIVATE)
-        val language = sharedPreferences?.getString("selected_language", "en") ?: "en"
+        val language = sharedPreferences?.getString("selected_language", "ru") ?: "ru"
 
         val locale = Locale(language)
         Locale.setDefault(locale)

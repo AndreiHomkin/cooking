@@ -78,7 +78,7 @@ class AddFragment : Fragment() {
     @SuppressLint("NotifyDataSetChanged")
     private fun refreshItems() {
         val sharedPreferencesLang = requireContext().getSharedPreferences("language", Context.MODE_PRIVATE)
-        val language = sharedPreferencesLang.getString("selected_language", "en")
+        val language = sharedPreferencesLang.getString("selected_language", "ru")
         val userId = getUserId()
         itemsArrayList.clear()
         itemsArrayList.addAll(dbHelper.getFoodsByUserAndLanguage(userId, language!!))

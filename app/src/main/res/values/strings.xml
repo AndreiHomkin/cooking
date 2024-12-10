@@ -172,4 +172,7 @@
     <string name="email_is_incorrect">Email is incorrect</string>
     <string name="too_simple_password">Too simple password</string>
     <string name="user_got_added">User %1$s got added</string>
+    <string name="privacy">Privacy</string>
+    <string name="private123">private</string>
+    <string name="public123">public</string>
 </resources>
