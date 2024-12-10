@@ -3,6 +3,7 @@
 package com.example.cook
 
 import android.content.Context
+import android.content.res.Configuration
 import android.os.Bundle
 import android.widget.ImageView
 import android.widget.ScrollView
@@ -11,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import java.util.Locale
 
 class CategoriesActivity: AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
@@ -75,5 +77,16 @@ class CategoriesActivity: AppCompatActivity() {
         itemsArrayList.addAll(foodList)
         adapter = ItemsAdapter(itemsArrayList, isDarkMode)
         recyclerView.adapter = adapter
+    }
+    override fun attachBaseContext(newBase: Context?) {
+        val sharedPreferences = newBase?.getSharedPreferences("language", Context.MODE_PRIVATE)
+        val language = sharedPreferences?.getString("selected_language", "en") ?: "en"
+
+        val locale = Locale(language)
+        Locale.setDefault(locale)
+        val config = Configuration(newBase?.resources?.configuration).apply {
+            setLocale(locale)
+        }
+        super.attachBaseContext(newBase?.createConfigurationContext(config))
     }
 }

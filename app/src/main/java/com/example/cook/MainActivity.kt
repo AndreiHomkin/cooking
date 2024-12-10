@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val sharedPreferences = getSharedPreferences("language", Context.MODE_PRIVATE)
-        val language = sharedPreferences.getString("selected_language", "en")
+        val language = sharedPreferences.getString("selected_language", "ru")
         val locale = Locale(language!!)
         Locale.setDefault(locale)
         val config = resources.configuration
@@ -90,7 +90,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun attachBaseContext(newBase: Context?) {
         val sharedPreferences = newBase?.getSharedPreferences("language", Context.MODE_PRIVATE)
-        val language = sharedPreferences?.getString("selected_language", "en") ?: "en"
+        val language = sharedPreferences?.getString("selected_language", "ru") ?: "ru"
 
         val locale = Locale(language)
         Locale.setDefault(locale)
@@ -145,16 +145,5 @@ class MainActivity : AppCompatActivity() {
                 .replace(R.id.frame_layout, fragment)
                 .commit()
         }
-    }
-    fun updateLocale(language: String) {
-        val locale = Locale(language)
-        Locale.setDefault(locale)
-
-        val config = Configuration(resources.configuration)
-        config.setLocale(locale)
-
-        baseContext.resources.updateConfiguration(config, baseContext.resources.displayMetrics)
-
-        recreate() // Перезапуск активности для применения изменений
     }
 }

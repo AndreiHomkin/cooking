@@ -2,7 +2,35 @@
 <project version="4">
   <component name="deploymentTargetDropDown">
     <value>
+      <entry key="ProfileFragmentTest">
+        <State />
+      </entry>
+      <entry key="RegisterActivityTest">
+        <State />
+      </entry>
       <entry key="app">
+        <State>
+          <targetSelectedWithDropDown>
+            <Target>
+              <type value="QUICK_BOOT_TARGET" />
+              <deviceKey>
+                <Key>
+                  <type value="VIRTUAL_DEVICE_PATH" />
+                  <value value="C:\Users\Andrew Homkin\.android\avd\Pixel_3a_API_34_extension_level_7_x86_64.avd" />
+                </Key>
+              </deviceKey>
+            </Target>
+          </targetSelectedWithDropDown>
+          <timeTargetWasSelectedWithDropDown value="2024-12-09T15:37:28.588039600Z" />
+        </State>
+      </entry>
+      <entry key="testLoginButtonWithInvalidCredentials()">
+        <State />
+      </entry>
+      <entry key="testLoginButtonWithInvalidCredentials() (1)">
+        <State />
+      </entry>
+      <entry key="testNavigateToAuthActivity()">
         <State />
       </entry>
     </value>

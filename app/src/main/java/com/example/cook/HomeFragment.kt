@@ -80,10 +80,13 @@ class HomeFragment : Fragment() {
         dataInitialiseCategory()
         dataInitialiseCategory1()
         dataAdd(language.toString())
-        if (!isDataLoaded) {
+        /*if (!isDataLoaded) {
             itemsArrayList = getOrSetInitialRecipes(language!!)
             isDataLoaded = true
-        }
+        }*/
+
+        itemsArrayList = getOrSetInitialRecipes(language!!)
+        isDataLoaded = true
 
         val layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         recycler = view.findViewById(R.id.targetsList)

@@ -1,14 +1,18 @@
 package com.example.cook
 
+import android.content.Context
 import android.content.Intent
+import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import java.util.Locale
 
 class AuthActivity : AppCompatActivity() {
+    var dbHelper: DbHelper = DbHelper(this, null)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_auth)
@@ -32,15 +36,15 @@ class AuthActivity : AppCompatActivity() {
             if(login == "" || pass == "")
                 Toast.makeText(this, getString(R.string.fill_all_fields), Toast.LENGTH_LONG).show()
             else{
-                val db = DbHelper(this, null)
-                val isAuth = db.getUser(login, pass)
+                dbHelper = DbHelper(this, null)
+                val isAuth = dbHelper.getUser(login, pass)
 
                 if(isAuth){
                     Toast.makeText(this, getString(R.string.user_logged_in, login), Toast.LENGTH_LONG).show()
                     userLogin.text.clear()
                     userPass.text.clear()
 
-                    val userId = db.getUserId(login)
+                    val userId = dbHelper.getUserId(login)
                     val sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE)
                     val editor = sharedPreferences.edit()
                     editor.putInt("userId", userId)
@@ -59,5 +63,16 @@ class AuthActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+    override fun attachBaseContext(newBase: Context?) {
+        val sharedPreferences = newBase?.getSharedPreferences("language", Context.MODE_PRIVATE)
+        val language = sharedPreferences?.getString("selected_language", "en") ?: "en"
+
+        val locale = Locale(language)
+        Locale.setDefault(locale)
+        val config = Configuration(newBase?.resources?.configuration).apply {
+            setLocale(locale)
+        }
+        super.attachBaseContext(newBase?.createConfigurationContext(config))
     }
 }

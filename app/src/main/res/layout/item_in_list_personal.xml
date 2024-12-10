@@ -41,7 +41,7 @@
         android:textSize="20sp"
         android:textColor="@color/white"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="70dp"
         android:text="TextView" />
 
     <Button

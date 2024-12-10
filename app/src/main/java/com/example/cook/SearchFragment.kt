@@ -39,7 +39,7 @@ class SearchFragment : Fragment() {
         val isDarkMode = settingsPreferences.getBoolean("isDarkMode", false)
 
         val sharedPreferencesLang = requireContext().getSharedPreferences("language", Context.MODE_PRIVATE)
-        val language = sharedPreferencesLang.getString("selected_language", "en")
+        val language = sharedPreferencesLang.getString("selected_language", "ru")
 
         recycler = view.findViewById(R.id.recyclerView)
         searchView = view.findViewById(R.id.searchView)
