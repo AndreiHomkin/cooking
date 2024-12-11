@@ -2,10 +2,7 @@
 <project version="4">
   <component name="deploymentTargetDropDown">
     <value>
-      <entry key="ProfileFragmentTest">
-        <State />
-      </entry>
-      <entry key="RegisterActivityTest">
+      <entry key="HomeFragmentTest">
         <State />
       </entry>
       <entry key="app">
@@ -21,16 +18,19 @@
               </deviceKey>
             </Target>
           </targetSelectedWithDropDown>
-          <timeTargetWasSelectedWithDropDown value="2024-12-09T15:37:28.588039600Z" />
+          <timeTargetWasSelectedWithDropDown value="2024-12-10T13:07:03.148930400Z" />
         </State>
       </entry>
-      <entry key="testLoginButtonWithInvalidCredentials()">
+      <entry key="testLanguageChange()">
         <State />
       </entry>
-      <entry key="testLoginButtonWithInvalidCredentials() (1)">
+      <entry key="testNavigationToDetailsFragment()">
         <State />
       </entry>
-      <entry key="testNavigateToAuthActivity()">
+      <entry key="testScrollAndClick()">
+        <State />
+      </entry>
+      <entry key="testScrollToItemByPosition()">
         <State />
       </entry>
     </value>

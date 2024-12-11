@@ -45,7 +45,7 @@ class FavouritesFragment : Fragment() {
         val isDarkMode = settingsPreferences.getBoolean("isDarkMode", false)
 
         val sharedPreferencesLang = requireContext().getSharedPreferences("language", Context.MODE_PRIVATE)
-        val language = sharedPreferencesLang.getString("selected_language", "en")
+        val language = sharedPreferencesLang.getString("selected_language", "ru")
 
         dbHelper = DbHelper(requireContext(), null)
 
@@ -119,7 +119,7 @@ class FavouritesFragment : Fragment() {
         val userName = sharedPreferencesUser.getString("userName", "Unknown")
 
         val sharedPreferencesLang = requireContext().getSharedPreferences("language", Context.MODE_PRIVATE)
-        val language = sharedPreferencesLang.getString("selected_language", "en")
+        val language = sharedPreferencesLang.getString("selected_language", "ru")
 
         val userId = dbHelper.getUserId(userName!!)
         val updatedFavorites = dbHelper.getFavoritesByUserAndLanguage(userId, language!!)

@@ -181,7 +181,7 @@
         app:layout_constraintHorizontal_bias="0.945"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/receiptDesc"
-        app:layout_constraintVertical_bias="0.144"
+        app:layout_constraintVertical_bias="0.15"
         app:srcCompat="@drawable/dinner" />
 
     <TextView
@@ -195,7 +195,7 @@
         android:textColor="@color/black"
         android:textSize="25sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.035"
+        app:layout_constraintHorizontal_bias="0.05"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -204,7 +204,7 @@
         android:layout_width="220dp"
         android:layout_height="50dp"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="56dp"
+        android:layout_marginBottom="40dp"
         android:backgroundTint="#8E0303"
         android:fontFamily="@font/gilroy_extrabold"
         android:gravity="center"
@@ -246,13 +246,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="488dp"
+        android:layout_marginTop="560dp"
         android:fontFamily="@font/gilroy_light"
         android:text="@string/privacy"
         android:textColor="@color/black"
         android:textSize="25sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.035"
+        app:layout_constraintHorizontal_bias="0.048"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -260,11 +260,11 @@
         android:id="@+id/spinnerPrivacy"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="544dp"
+        android:layout_marginTop="555dp"
         android:minHeight="50dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.037"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.917"
+        app:layout_constraintStart_toEndOf="@+id/privacy"
         app:layout_constraintTop_toTopOf="parent" />
 
 

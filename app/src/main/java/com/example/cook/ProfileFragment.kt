@@ -149,7 +149,9 @@ class ProfileFragment : Fragment() {
             menu.findItem(R.id.profile).title = getString(R.string.profile_menu)
             menu.findItem(R.id.search).title = getString(R.string.settings_menu)
 
-            profileName.text = getString(R.string.you_are_not_logged_in_yet)
+            val sharedPreferences = requireContext().getSharedPreferences("UserPrefs", Context.MODE_PRIVATE)
+            val userName = sharedPreferences.getString("userName", getString(R.string.you_are_not_logged_in_yet))
+            profileName.text = userName
 
             val intent = requireActivity().intent
             requireActivity().finish()
