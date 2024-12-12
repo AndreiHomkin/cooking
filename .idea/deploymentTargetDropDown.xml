@@ -2,7 +2,7 @@
 <project version="4">
   <component name="deploymentTargetDropDown">
     <value>
-      <entry key="HomeFragmentTest">
+      <entry key="AddActivityTest">
         <State />
       </entry>
       <entry key="app">
@@ -21,16 +21,16 @@
           <timeTargetWasSelectedWithDropDown value="2024-12-10T13:07:03.148930400Z" />
         </State>
       </entry>
-      <entry key="testLanguageChange()">
+      <entry key="testBackgroundChangeBasedOnDarkMode()">
         <State />
       </entry>
-      <entry key="testNavigationToDetailsFragment()">
+      <entry key="testEmptyFieldsValidation()">
         <State />
       </entry>
-      <entry key="testScrollAndClick()">
+      <entry key="testFillFormAndSubmit()">
         <State />
       </entry>
-      <entry key="testScrollToItemByPosition()">
+      <entry key="testImageSelection()">
         <State />
       </entry>
     </value>

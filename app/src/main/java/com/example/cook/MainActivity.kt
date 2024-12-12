@@ -21,6 +21,15 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        val sharedPreferencesSettings = getSharedPreferences("Settings", Context.MODE_PRIVATE)
+        val isDarkMode = sharedPreferencesSettings.getBoolean("isDarkMode", false)
+        if(isDarkMode){
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        }
+        else{
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        }
+
         val sharedPreferences = getSharedPreferences("language", Context.MODE_PRIVATE)
         val language = sharedPreferences.getString("selected_language", "ru")
         val locale = Locale(language!!)
@@ -30,7 +39,7 @@ class MainActivity : AppCompatActivity() {
         resources.updateConfiguration(config, resources.displayMetrics)
 
         if (!isNetworkAvailable()) {
-            AlertDialog.Builder(this).apply {
+            AlertDialog.Builder(this, R.style.AlertDialogButtonStyle).apply {
                 setTitle(getString(R.string.error_title))
                 setMessage(getString(R.string.error_message))
                 setPositiveButton(getString(R.string.yes)) { dialog: DialogInterface, _: Int ->
@@ -76,15 +85,6 @@ class MainActivity : AppCompatActivity() {
                 sharedPreferences123.edit().clear().apply()
             }
             sharedPreferences123.edit().putBoolean("isAppOpen", true).apply()
-
-            val sharedPreferencesSettings = getSharedPreferences("Settings", Context.MODE_PRIVATE)
-            val isDarkMode = sharedPreferencesSettings.getBoolean("isDarkMode", false)
-            if(isDarkMode){
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-            }
-            else{
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-            }
         }
     }
 
@@ -102,7 +102,7 @@ class MainActivity : AppCompatActivity() {
     @Deprecated("Deprecated in Java")
     @SuppressLint("MissingSuperCall")
     override fun onBackPressed() {
-        AlertDialog.Builder(this).apply {
+        AlertDialog.Builder(this, R.style.AlertDialogButtonStyle).apply {
             setTitle(R.string.exit_app_title)
             setMessage(R.string.exit_app_message)
             setPositiveButton(R.string.yes) { dialog: DialogInterface, _: Int ->

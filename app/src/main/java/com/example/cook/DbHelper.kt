@@ -86,9 +86,10 @@ class DbHelper(val context: Context, factory: SQLiteDatabase.CursorFactory?):
 
     @SuppressLint("Recycle")
     fun getUser(login: String, pass: String): Boolean{
+        val hashedPassword = hashPassword(pass)
         val db = this.readableDatabase
 
-        val result = db.rawQuery("SELECT * FROM users WHERE login = '$login' AND pass = '$pass'", null)
+        val result = db.rawQuery("SELECT * FROM users WHERE login = '$login' AND pass = '$hashedPassword'", null)
         return result.moveToFirst()
     }
 

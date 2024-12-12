@@ -9,6 +9,7 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import java.security.MessageDigest
 import java.util.Locale
 
 class RegisterActivity : AppCompatActivity() {
@@ -48,7 +49,8 @@ class RegisterActivity : AppCompatActivity() {
                     Toast.makeText(this, getString(R.string.too_simple_password), Toast.LENGTH_LONG).show()
                 }
                 else{
-                    val user = User(login, email, pass)
+                    val hashedPassword = hashPassword(pass)
+                    val user = User(login, email, hashedPassword)
                     db.addUser(user)
                     Toast.makeText(this,
                         getString(R.string.user_got_added, login), Toast.LENGTH_LONG).show()

@@ -25,7 +25,7 @@
     <string name="descriptionWithDblpoint">Описание:</string>
     <string name="when_to_eat">Когда принимать:</string>
     <string name="categoryWithDblpoint">Категория:</string>
-    <string name="you_don_t_have_here_anything_yet">У вас нет ничего здесь</string>
+    <string name="you_don_t_have_here_anything_yet">У вас здесь ничего нет</string>
     <string name="login_to_add_favourites">Войти чтобы добавить в любимые</string>
     <string name="favourites">Любимые</string>
     <string name="menu">Меню</string>
