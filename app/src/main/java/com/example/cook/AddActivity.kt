@@ -265,6 +265,7 @@ class AddActivity : AppCompatActivity() {
         nameReceipt.text.clear()
         ingReceipt.text.clear()
         descReceipt.text.clear()
+        addImage.setImageResource(R.drawable.dinner)
     }
     override fun attachBaseContext(newBase: Context?) {
         val sharedPreferences = newBase?.getSharedPreferences("language", Context.MODE_PRIVATE)
